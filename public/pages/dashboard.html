@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard | Portal Scrum</title>
+        <link rel="stylesheet" href="../assets/css/base.css" />
+        <link rel="stylesheet" href="../assets/css/app.css" />
+        <script src="../assets/js/theme.js" defer></script>
+        <script src="../assets/js/storage.js" defer></script>
+        <script src="../assets/js/api.js" defer></script>
+        <script src="../assets/js/ui.js" defer></script>
+        <script src="../assets/js/dashboard.js" defer></script>
+    </head>
+    <body>
+        <div class="page">
+            <header class="site-header">
+                <div class="container header-row">
+                    <div class="header-title header-title-spaced">
+                        <button
+                            class="icon-button"
+                            type="button"
+                            data-back="hub.html"
+                            aria-label="Voltar"
+                        >
+                            &lt;
+                        </button>
+                        <img
+                            class="brand-logo"
+                            src="../assets/images/logoBranca.png"
+                            alt="Logo STACKED"
+                            width="42"
+                            height="42"
+                        />
+                        <span>
+                            <strong>Dashboard</strong>
+                            <span>Acompanhe seu progresso</span>
+                        </span>
+                    </div>
+                    <nav class="nav-actions" aria-label="Navegacao da conta">
+                        <a class="button button-outline" href="perfil.html"
+                            >Perfil</a
+                        >
+                        <a class="button button-primary" href="modulos.html"
+                            >Fazer Prova</a
+                        >
+                    </nav>
+                </div>
+            </header>
+
+            <main class="container app-layout">
+                <section class="grid grid-4" aria-label="Resumo">
+                    <article class="card metric-card">
+                        <div class="metric-top">
+                            <span>Módulos</span
+                            ><span
+                                class="badge badge-primary"
+                                data-general-percent
+                                >0%</span
+                            >
+                        </div>
+                        <div class="metric-value" data-modules-complete>
+                            0/5
+                        </div>
+                        <p class="muted">Módulos completos</p>
+                        <div class="progress">
+                            <div
+                                class="progress-bar"
+                                data-general-progress
+                            ></div>
+                        </div>
+                    </article>
+                    <article class="card metric-card">
+                        <div class="metric-top">
+                            <span>Melhor Nota</span><span>*</span>
+                        </div>
+                        <div class="metric-value text-success" data-best-grade>
+                            0%
+                        </div>
+                        <p class="muted">Maior resultado</p>
+                    </article>
+                    <article class="card metric-card">
+                        <div class="metric-top">
+                            <span>Última Nota</span><span>^</span>
+                        </div>
+                        <div class="metric-value" data-last-grade>0%</div>
+                        <p class="muted">Resultado mais recente</p>
+                    </article>
+                    <article class="card metric-card">
+                        <div class="metric-top">
+                            <span>Média Geral</span><span>#</span>
+                        </div>
+                        <div
+                            class="metric-value text-success"
+                            data-average-grade
+                        >
+                            0%
+                        </div>
+                        <p class="muted">Média das tentativas</p>
+                    </article>
+                </section>
+
+                <section class="grid grid-2 section-tight">
+                    <article class="card panel">
+                        <h2>Progresso por Módulo</h2>
+                        <div
+                            class="progress-list"
+                            data-dashboard-progress
+                        ></div>
+                    </article>
+                    <article class="card panel">
+                        <h2>Status dos Módulos</h2>
+                        <div class="status-list" data-dashboard-status></div>
+                    </article>
+                </section>
+
+                <section class="card panel">
+                    <div class="row-between">
+                        <div>
+                            <h2>Tasks para Emissão do Certificado</h2>
+                            <p class="muted" data-task-summary>
+                                0 de 7 tarefas concluidas
+                            </p>
+                        </div>
+                        <div
+                            class="metric-value text-primary"
+                            data-task-percent
+                        >
+                            0%
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" data-task-bar></div>
+                    </div>
+                    <div class="task-list section-tight" data-task-list></div>
+                </section>
+
+                <section
+                    class="card certificate-cta"
+                    data-certificate-cta
+                ></section>
+            </main>
+        </div>
+    </body>
+</html>

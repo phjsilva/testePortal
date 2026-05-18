@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Certificado | Portal Scrum</title>
+        <link rel="stylesheet" href="../assets/css/base.css" />
+        <link rel="stylesheet" href="../assets/css/app.css" />
+        <link rel="stylesheet" href="../assets/css/certificate.css" />
+        <script src="../assets/js/storage.js" defer></script>
+        <script src="../assets/js/ui.js" defer></script>
+        <script src="../assets/js/api.js" defer></script>
+        <script src="../assets/js/certificate.js" defer></script>
+    </head>
+    <body>
+        <div class="page">
+            <header class="site-header">
+                <div class="container header-row">
+                    <div class="header-title">
+                        <button
+                            class="icon-button"
+                            type="button"
+                            data-back="hub.html"
+                            aria-label="Voltar"
+                        >
+                            &lt;
+                        </button>
+                        <span class="brand-mark">C</span>
+                        <span>
+                            <strong>Certificado</strong>
+                            <span>Parabens pela conquista</span>
+                        </span>
+                    </div>
+                    <div class="nav-actions">
+                        <button
+                            class="button button-outline"
+                            type="button"
+                            data-share-certificate
+                        >
+                            Compartilhar
+                        </button>
+                        <button
+                            class="button button-primary"
+                            type="button"
+                            data-print-certificate
+                        >
+                            Baixar PDF
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <main class="container app-layout">
+                <section class="certificate-wrap">
+                    <article
+                        class="certificate"
+                        aria-labelledby="certificate-title"
+                    >
+                        <div class="certificate-logo" aria-hidden="true">S</div>
+                        <h2 id="certificate-title">Certificado de Conclusao</h2>
+                        <p class="lead">
+                            Portal Scrum - Certificacao Profissional
+                        </p>
+
+                        <section class="certificate-person">
+                            <p class="muted">Este certificado e concedido a</p>
+                            <h3 data-certificate-name>Aluno Portal Scrum</h3>
+                            <p class="muted" style="font-size: 0.95rem; margin: 8px 0;">
+                                CPF: <strong data-certificate-cpf>---</strong>
+                            </p>
+                            <p class="muted" style="font-size: 0.95rem; margin: 8px 0;">
+                                Email: <strong data-certificate-email>---</strong>
+                            </p>
+                            <p class="muted" style="margin-top: 16px;">
+                                Por ter concluido com excelencia o curso de
+                            </p>
+                            <h4>Scrum Master Professional Certificate</h4>
+                            <p class="muted">
+                                Demonstrando proficiencia nos fundamentos,
+                                papeis, eventos e artefatos do framework Scrum.
+                            </p>
+                        </section>
+
+                        <section
+                            class="grid grid-3 certificate-details"
+                            aria-label="Detalhes do certificado"
+                        >
+                            <div class="card">
+                                <p class="muted">Data de Conclusao</p>
+                                <strong data-certificate-date
+                                    >14 de maio de 2026</strong
+                                >
+                            </div>
+                            <div class="card">
+                                <p class="muted">Nota Final</p>
+                                <strong
+                                    class="text-success"
+                                    data-certificate-grade
+                                    >85%</strong
+                                >
+                            </div>
+                            <div class="card">
+                                <p class="muted">ID do Certificado</p>
+                                <strong data-certificate-id
+                                    >SCRUM-2026-84521</strong
+                                >
+                            </div>
+                        </section>
+
+                        <section class="certificate-breakdown" style="margin-top: 28px;">
+                            <p class="muted" style="margin-bottom: 12px; font-weight: 600;">Discriminacao por Nivel de Dificuldade</p>
+                            <div class="breakdown-content" style="padding: 16px; background: rgba(139, 92, 246, 0.08); border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.2);">
+                                <p data-certificate-breakdown style="margin: 0; font-size: 0.95rem; line-height: 1.6;">
+                                    Facil: --% | Medio: --% | Dificil: --%
+                                </p>
+                            </div>
+                        </section>
+
+                        <footer class="signature-row">
+                            <div>
+                                <div class="signature-line"></div>
+                                <p class="muted">Instrutor Responsavel</p>
+                                <strong>Portal Scrum Team</strong>
+                            </div>
+                            <div>
+                                <div class="signature-line"></div>
+                                <p class="muted">Validade</p>
+                                <strong>Indeterminada</strong>
+                            </div>
+                        </footer>
+                    </article>
+
+                    <section class="share-actions">
+                        <h2>Compartilhe sua conquista</h2>
+                        <p class="muted">
+                            Mostre ao mundo sua certificacao profissional em
+                            Scrum.
+                        </p>
+                        <div class="social-buttons">
+                            <button
+                                class="button button-outline"
+                                type="button"
+                                data-share-certificate
+                            >
+                                LinkedIn
+                            </button>
+                            <button
+                                class="button button-outline"
+                                type="button"
+                                data-share-certificate
+                            >
+                                Twitter
+                            </button>
+                            <button
+                                class="button button-outline"
+                                type="button"
+                                data-share-certificate
+                            >
+                                Facebook
+                            </button>
+                        </div>
+                    </section>
+                </section>
+            </main>
+        </div>
+
+        <!-- Modal de confirmação de emissão de certificado -->
+        <div class="modal-backdrop" id="modal-certificate-confirm" role="dialog" aria-modal="true" aria-labelledby="modal-cert-title">
+            <div class="card modal">
+                <div class="certificate-modal-icon">🎓</div>
+                <h2 id="modal-cert-title" style="margin: 0 0 8px; font-size: 1.4rem;">Emitir Certificado</h2>
+                <p class="muted" style="margin: 0;">Deseja gerar seu certificado de conclusão?</p>
+                <ul class="certificate-modal-list">
+                    <li>Nome completo</li>
+                    <li>CPF</li>
+                    <li>Email</li>
+                    <li>Data de emissão</li>
+                    <li>Nota final e discriminação por nível</li>
+                </ul>
+                <div class="modal-actions">
+                    <button class="button button-outline" type="button" id="modal-cert-cancel">Cancelar</button>
+                    <button class="button button-primary" type="button" id="modal-cert-confirm">Gerar Certificado</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

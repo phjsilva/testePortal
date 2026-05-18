@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil | Portal Scrum</title>
+    <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/app.css" />
+    <script src="../assets/js/theme.js" defer></script>
+    <script src="../assets/js/storage.js" defer></script>
+        <script src="../assets/js/api.js" defer></script>
+    <script src="../assets/js/ui.js" defer></script>
+    <script src="../assets/js/profile.js" defer></script>
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <div class="container header-row">
+          <div class="header-title header-title-spaced">
+            <button
+              class="icon-button"
+              type="button"
+              data-back="hub.html"
+              aria-label="Voltar"
+            >
+              &lt;
+            </button>
+            <img
+              class="brand-logo"
+              src="../assets/images/logoBranca.png"
+              alt="Logo STACKED"
+              width="42"
+              height="42"
+            />
+            <span>
+              <strong>Meu Perfil</strong>
+              <span>Gerencie suas informacoes pessoais</span>
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <main class="container app-layout">
+        <section class="card profile-card" aria-labelledby="profile-title">
+          <h1 id="profile-title" class="section-title">Dados do perfil</h1>
+          <form class="profile-form" data-profile-form>
+            <div class="avatar-editor">
+              <div class="avatar" data-avatar-preview>U</div>
+              <label class="avatar-camera" aria-label="Alterar foto">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -1 28 28">
+                  <g data-name="Layer 2">
+                    <g data-name="camera">
+                      <rect width="24" height="24" opacity="0" />
+                      <path
+                        d="M19 7h-3V5.5A2.5 2.5 0 0 0 13.5 3h-3A2.5 2.5 0 0 0 8 5.5V7H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-8a3 3 0 0 0-3-3zm-9-1.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V7h-4zM20 18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1z"
+                      />
+                      <path
+                        d="M12 10.5a3.5 3.5 0 1 0 3.5 3.5 3.5 3.5 0 0 0-3.5-3.5zm0 5a1.5 1.5 0 1 1 1.5-1.5 1.5 1.5 0 0 1-1.5 1.5z"
+                      />
+                    </g>
+                  </g>
+                </svg>
+                <input
+                  class="hidden"
+                  type="file"
+                  name="profilePhoto"
+                  accept="image/*"
+                />
+              </label>
+              <p class="muted">Clique na camera para alterar sua foto</p>
+            </div>
+
+            <div class="alert" data-profile-alert role="alert"></div>
+
+            <div class="form-field">
+              <label for="name">Nome de usuario</label>
+              <div class="input-wrap">
+                <span class="field-icon" aria-hidden="true">U</span>
+                <input
+                  class="input with-icon"
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Seu nome"
+                  autocomplete="name"
+                />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <div class="input-wrap">
+                <span class="field-icon" aria-hidden="true">@</span>
+                <input
+                  class="input with-icon"
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  autocomplete="email"
+                />
+              </div>
+            </div>
+
+            <section class="profile-form" aria-labelledby="password-title">
+              <h2 id="password-title">Alterar Senha</h2>
+              <div class="form-field">
+                <label for="currentPassword">Senha atual</label>
+                <div class="input-wrap">
+                  <span class="field-icon" aria-hidden="true">*</span>
+                  <input
+                    class="input with-icon"
+                    id="currentPassword"
+                    name="currentPassword"
+                    type="password"
+                    placeholder="********"
+                    autocomplete="current-password"
+                  />
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="newPassword">Nova senha</label>
+                <div class="input-wrap">
+                  <span class="field-icon" aria-hidden="true">*</span>
+                  <input
+                    class="input with-icon"
+                    id="newPassword"
+                    name="newPassword"
+                    type="password"
+                    placeholder="********"
+                    autocomplete="new-password"
+                  />
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="confirmPassword">Confirmar nova senha</label>
+                <div class="input-wrap">
+                  <span class="field-icon" aria-hidden="true">*</span>
+                  <input
+                    class="input with-icon"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="********"
+                    autocomplete="new-password"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <button class="button button-primary" type="submit">
+              Salvar Alterações
+            </button>
+          </form>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

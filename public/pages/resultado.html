@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Resultado | Portal Scrum</title>
+        <link rel="stylesheet" href="../assets/css/base.css" />
+        <link rel="stylesheet" href="../assets/css/exam.css" />
+        <script src="../assets/js/theme.js" defer></script>
+        <script src="../assets/js/api.js" defer></script>
+        <script src="../assets/js/result.js" defer></script>
+    </head>
+    <body>
+        <main class="auth-page">
+            <section class="card result-card">
+                <div class="result-icon" data-result-icon>...</div>
+                <h1 data-result-title>Carregando resultado...</h1>
+                <p class="lead" data-result-message></p>
+                <div class="result-score" data-result-score>0%</div>
+                <p class="muted" data-result-count>0 de 0 questoes corretas</p>
+                <div class="progress">
+                    <div class="progress-bar" data-result-bar></div>
+                </div>
+                <div class="grid grid-2 section-tight">
+                    <div>
+                        <div class="metric-value text-success" data-correct-count>0</div>
+                        <p class="muted">Corretas</p>
+                    </div>
+                    <div>
+                        <div class="metric-value text-danger" data-wrong-count>0</div>
+                        <p class="muted">Incorretas</p>
+                    </div>
+                </div>
+                <div class="section-tight result-actions">
+                    <a class="button button-primary" href="modulos.html">Voltar aos modulos</a>
+                    <a class="button button-outline" href="dashboard.html">Ver dashboard</a>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STACKED - Login</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/login.css" />
+    <link
+      rel="shortcut icon"
+      href="../assets/images/logoEscuro.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <div class="logo logo-login">
+        <img src="../assets/images/logoBranca.png" alt="Logo STACKED" />
+      </div>
+      <div class="form">
+        <form action="" method="post" class="form-login" id="form">
+          <div class="input-box">
+            <div class="box-lgpd">
+              <label for="cpf" >CPF</label>
+              <div class="container-lgpd">
+                <button class="botao">?</button>
+                <div class="tooltip">O CPF está sendo utilizado como identificação única para obter a certificação ao final</div>
+              </div>
+            </div>
+            <input type="text" id="cpf" name="cpf" class="deactivated" />
+            <span id="cpf-error">CPF inválido</span>
+          </div>
+          <div class="input-box">
+            <label for="password">SENHA</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="deactivated"
+            />
+            <span id="password-error">Digite sua senha</span>
+            <div class="forgot-password">
+              <a href="#">Esqueceu a senha?</a>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn-main">ENTRE</button>
+            <div class="divider">
+              <span>OU</span>
+            </div>
+
+            <a href="cadastro.html" class="btn-secondary">CADASTRE-SE</a>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="../assets/js/authValidators.js"></script>
+    <script src="../assets/js/login.js"></script>
+  </body>
+</html>
