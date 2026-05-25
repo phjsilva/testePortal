@@ -12,7 +12,8 @@
     "db:init": "node ./src/infra/run-sql"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/TeamStacked/PortalScrum.git"
   },
   "keywords": [],
   "author": "",

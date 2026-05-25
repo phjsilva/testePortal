@@ -1,70 +1,40 @@
 const { Router } = require('express')
-const {
-  findResultadoExameAtualByUsuario,
-  findResultadoExame,
-  sincronizarDesbloqueioModulos
-} = require('../repositories/questoes.repositories')
+const examesController = require('../controllers/exames.controller')
 const authMiddleware = require('../middlewares/auth.middleware')
 
 const router = Router()
 
-router.get('/', authMiddleware, async function (req, res) {
-  try {
-    const exames = await sincronizarDesbloqueioModulos(req.usuario.id_usuario)
-    return res.status(200).json(exames)
-  } catch (error) {
-    return res.status(500).json({ message: error.message })
-  }
-})
+/*
+GET /api/exames
+Como testar:
+curl -X GET http://localhost:3000/api/exames \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+Payload esperado: nenhum.
+Resposta 200: lista de modulos com status de desbloqueio.
+Codigos possiveis: 200, 401, 500
+*/
+router.get('/', authMiddleware, examesController.list)
 
-router.get('/resultado-atual', authMiddleware, async function (req, res) {
-  try {
-    const idExame = req.query.id_exame ? Number(req.query.id_exame) : null
-    const idModulo = req.query.modulo ? Number(req.query.modulo) : null
+/*
+GET /api/exames/resultado-atual?modulo=1
+Como testar:
+curl -X GET "http://localhost:3000/api/exames/resultado-atual?modulo=1" \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+Payload esperado: nenhum. Query opcional: modulo ou id_exame.
+Resposta 200: resultado de uma tentativa concluida.
+Codigos possiveis: 200, 401, 404, 409, 500
+*/
+router.get('/resultado-atual', authMiddleware, examesController.getResultadoAtual)
 
-    const resultado = await findResultadoExameAtualByUsuario(
-      req.usuario.id_usuario,
-      idExame,
-      idModulo
-    )
-
-    if (!resultado) {
-      return res.status(404).json({ message: 'Nenhum exame encontrado.' })
-    }
-
-    if (!resultado.concluido) {
-      return res.status(409).json({
-        message: 'Esta tentativa ainda nao foi finalizada.',
-        id_exame: resultado.id_exame,
-        id_modulo: resultado.id_modulo
-      })
-    }
-
-    return res.status(200).json(resultado)
-  } catch (error) {
-    return res.status(500).json({ message: error.message })
-  }
-})
-
-router.get('/resultado/:idExame', authMiddleware, async function (req, res) {
-  try {
-    const idExame = Number(req.params.idExame)
-    const resultado = await findResultadoExame(idExame, req.usuario.id_usuario)
-
-    if (!resultado) {
-      return res.status(404).json({ message: 'Exame nao encontrado.' })
-    }
-
-    if (!resultado.concluido) {
-      return res.status(409).json({
-        message: 'Esta tentativa ainda nao foi finalizada.'
-      })
-    }
-
-    return res.status(200).json(resultado)
-  } catch (error) {
-    return res.status(500).json({ message: error.message })
-  }
-})
+/*
+GET /api/exames/resultado/1
+Como testar:
+curl -X GET http://localhost:3000/api/exames/resultado/1 \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+Payload esperado: nenhum. Parametro esperado: idExame na URL.
+Resposta 200: resultado do exame informado.
+Codigos possiveis: 200, 401, 404, 409, 500
+*/
+router.get('/resultado/:idExame', authMiddleware, examesController.getResultado)
 
 module.exports = router

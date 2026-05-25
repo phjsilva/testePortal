@@ -1,34 +1,18 @@
 const { Router } = require('express')
-const {
-  findUsuarioByCpfAndSenha
-} = require('../repositories/usuario.repositories')
-const { createToken } = require('../utils/jwt')
+const authController = require('../controllers/auth.controller')
 
 const router = Router()
 
-router.post('/login', async function (req, res) {
-  const { cpf, senha } = req.body
-
-  if (!cpf || !senha) {
-    return res.status(400).json({ message: 'CPF e senha sao obrigatorios' })
-  }
-
-  try {
-    const usuario = await findUsuarioByCpfAndSenha(cpf, senha)
-    const token = createToken({ id_usuario: usuario.id_usuario })
-    return res.status(200).json({ token, nome: usuario.nome })
-  } catch (error) {
-    if (
-      error.message === 'Usuario nao encontrado.' ||
-      error.message === 'Senha invalida.' ||
-      error.message === 'usuario inexistente' ||
-      error.message === 'Dados de login incorretos'
-    ) {
-      return res.status(401).json({ message: 'CPF ou senha incorretos.' })
-    }
-
-    return res.status(500).json({ message: 'Erro interno do servidor.' })
-  }
-})
+/*
+POST /api/auth/login
+Como testar:
+curl -X POST http://localhost:3000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d "{\"cpf\":\"12345678900\",\"senha\":\"123456\"}"
+Payload esperado: { "cpf": "12345678900", "senha": "123456" }
+Resposta 200: { "token": "jwt", "nome": "Nome do aluno" }
+Codigos possiveis: 200, 400, 401, 500
+*/
+router.post('/login', authController.login)
 
 module.exports = router

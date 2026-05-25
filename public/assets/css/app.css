@@ -109,20 +109,8 @@
 .header-title-spaced {
     min-width: 0;
 }
-.header-title-spaced .brand-mark,
-.header-title-spaced .brand-logo {
+.header-title-spaced .brand-mark {
     margin-left: 4px;
-}
-.header-row--modules {
-    flex-wrap: wrap;
-}
-.header-progress {
-    text-align: right;
-    min-width: 0;
-}
-.header-progress strong {
-    display: block;
-    white-space: nowrap;
 }
 .module-list,
 .task-list,
@@ -168,9 +156,6 @@
     border-radius: 14px;
     background: var(--muted);
     color: #fff;
-    font-size: 1.35rem;
-    font-weight: 900;
-    line-height: 1;
 }
 .module-card.is-available .module-icon {
     background: var(--primary);
@@ -280,15 +265,5 @@
     .module-main {
         align-items: flex-start;
         flex-direction: column;
-    }
-    .header-progress {
-        width: 100%;
-        text-align: left;
-    }
-    .module-meta .badge {
-        font-size: 0.72rem;
-    }
-    .certificate-cta .button {
-        width: 100%;
     }
 }

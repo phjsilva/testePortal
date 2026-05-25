@@ -209,6 +209,7 @@ button:disabled {
     border-radius: 16px;
     background: rgba(55, 65, 81, 0.88);
     box-shadow: 0 18px 44px rgba(0, 0, 0, 0.12);
+    margin-top: 10px;
 }
 [data-theme="light"] .card {
     background: rgba(255, 255, 255, 0.98);

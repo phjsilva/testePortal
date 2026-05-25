@@ -37,9 +37,9 @@
 
   function rotuloDificuldade(valor) {
     const nivel = normalizarDificuldade(valor)
-    if (nivel.includes('facil')) return 'Facil'
-    if (nivel.includes('dificil')) return 'Dificil'
-    if (nivel.includes('medio') || nivel.includes('media')) return 'Medio'
+    if (nivel.includes('facil')) return 'Fácil'
+    if (nivel.includes('dificil')) return 'Difícil'
+    if (nivel.includes('medio') || nivel.includes('media')) return 'Mèdio'
     return valor ? String(valor) : 'N/A'
   }
 
@@ -157,14 +157,14 @@
 
       if (res.status === 404) {
         mostrarErro(
-          'Nenhum exame em andamento. Volte aos modulos e inicie a prova.'
+          'Nenhum exame em andamento. Volte aos módulos e inicie a prova.'
         )
         return
       }
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}))
-        mostrarErro(data.message || 'Nao foi possivel carregar o exame.')
+        mostrarErro(data.message || 'Não foi possível carregar o exame.')
         return
       }
 
@@ -176,12 +176,12 @@
       }, {})
 
       if (!questoes.length) {
-        mostrarErro('Nenhuma questao foi encontrada para este exame.')
+        mostrarErro('Nenhuma questão foi encontrada para este exame.')
         return
       }
 
       if (modulo && Number(exameAtual.id_modulo) !== Number(modulo)) {
-        mostrarErro('O exame carregado nao corresponde ao modulo selecionado.')
+        mostrarErro('O exame carregado não corresponde ao módulo selecionado.')
         return
       }
 
@@ -269,7 +269,7 @@
     const count = document.querySelector('[data-question-count]')
 
     if (progress) progress.style.width = '100%'
-    if (count) count.textContent = 'Avaliacao concluida'
+    if (count) count.textContent = 'Avaliação concluído'
 
     window.location.href =
       'resultado.html?id_exame=' + encodeURIComponent(exameAtual.id_exame)
