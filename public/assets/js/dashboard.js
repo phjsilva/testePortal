@@ -63,38 +63,62 @@
         return clampPercent(module.percentualAcertos);
     }
 
-    function renderProgress(modules) {
-        $(selectors.dashboardProgress).innerHTML = modules.map(function (module) {
-            var progress = moduleProgressPercent(module);
-            return '<div class="module-progress-row"><div class="row-between"><strong>' + module.nome + '</strong><span>' + (module.nota !== null ? module.nota + "%" : "") + '</span></div><div class="progress"><div class="progress-bar ' + (progress >= 100 ? "success" : "") + '" data-width="' + progress + '"></div></div></div>';
-        }).join("");
-        document.querySelectorAll(selectors.dashboardProgress + " [data-width]").forEach(function (bar) {
+    function updateProgressBars(containerSelector) {
+        document.querySelectorAll(containerSelector + " [data-width]").forEach(function (bar) {
             bar.style.width = bar.dataset.width + "%";
         });
     }
 
-    function renderStatus(modules) {
-        $(selectors.dashboardStatus).innerHTML = modules.map(function (module) {
-            var badge = module.status === "concluido" ? "badge-success" : module.status === "disponivel" ? "badge-primary" : "badge-muted";
-            return '<div class="status-item"><span class="badge ' + badge + '">' + module.status + '</span><div><strong>' + module.nome + '</strong><p class="muted">' + module.tentativasUsadas + '/' + module.tentativas + ' tentativas usadas</p></div></div>';
-        }).join("");
+    function moduleProgressTemplate(module) {
+        var progress = moduleProgressPercent(module);
+        var barClass = progress >= 100 ? "success" : "";
+
+        return '<div class="module-progress-row"><div class="row-between"><strong>' + module.nome + '</strong><span>' + (module.nota !== null ? module.nota + "%" : "") + '</span></div><div class="progress"><div class="progress-bar ' + barClass + '" data-width="' + progress + '"></div></div></div>';
     }
 
-    function renderTasks(modules, user, average) {
+    function renderProgress(modules) {
+        $(selectors.dashboardProgress).innerHTML = modules.map(moduleProgressTemplate).join("");
+        updateProgressBars(selectors.dashboardProgress);
+    }
+
+    function statusBadgeClass(status) {
+        if (status === "concluido") return "badge-success";
+        if (status === "disponivel") return "badge-primary";
+        return "badge-muted";
+    }
+
+    function moduleStatusTemplate(module) {
+        return '<div class="status-item"><span class="badge ' + statusBadgeClass(module.status) + '">' + module.status + '</span><div><strong>' + module.nome + '</strong><p class="muted">' + module.tentativasUsadas + '/' + module.tentativas + ' tentativas usadas</p></div></div>';
+    }
+
+    function renderStatus(modules) {
+        $(selectors.dashboardStatus).innerHTML = modules.map(moduleStatusTemplate).join("");
+    }
+
+    function buildTasks(modules, user, average) {
         var tasks = modules.map(function (module) {
             return ["Complete o " + module.nome, module.status === "concluido"];
         });
+
         tasks.push(["Atinja media geral de 70% ou superior", average >= 70]);
         tasks.push(["Preencha seus dados no perfil", Boolean(user && user.nome)]);
 
+        return tasks;
+    }
+
+    function taskTemplate(task) {
+        return '<div class="task-item ' + (task[1] ? "is-done" : "") + '"><span>' + (task[1] ? "OK" : "--") + '</span><span>' + task[0] + '</span></div>';
+    }
+
+    function renderTasks(modules, user, average) {
+        var tasks = buildTasks(modules, user, average);
         var done = tasks.filter(function (task) { return task[1]; }).length;
         var percent = tasks.length ? (done / tasks.length) * 100 : 0;
+
         $(selectors.taskSummary).textContent = done + " de " + tasks.length + " tarefas concluidas";
         $(selectors.taskPercent).textContent = formatPercent(percent);
         $(selectors.taskBar).style.width = percent + "%";
-        $(selectors.taskList).innerHTML = tasks.map(function (task) {
-            return '<div class="task-item ' + (task[1] ? "is-done" : "") + '"><span>' + (task[1] ? "OK" : "--") + '</span><span>' + task[0] + '</span></div>';
-        }).join("");
+        $(selectors.taskList).innerHTML = tasks.map(taskTemplate).join("");
     }
 
     function renderSummary(modules, data) {
@@ -113,6 +137,16 @@
             : '<h2>Continue sua jornada</h2><p class="lead">Faltam ' + (modules.length - data.complete) + ' modulo(s) para concluir a certificacao.</p><a class="button button-primary" href="modulos.html">Continuar Estudando</a>';
     }
 
+    function renderDashboard(user, modules) {
+        var data = stats(modules);
+
+        renderSummary(modules, data);
+        renderProgress(modules);
+        renderStatus(modules);
+        renderTasks(modules, user, data.average);
+        renderCertificateCta(modules, data);
+    }
+
     async function fetchJson(url) {
         var response = await apiFetch(url);
         if (!response) return null;
@@ -129,12 +163,7 @@
         try {
             var user = await fetchJson("/api/usuarios/me");
             var modules = (await fetchJson("/api/exames")).map(normalizeModule);
-            var data = stats(modules);
-            renderSummary(modules, data);
-            renderProgress(modules);
-            renderStatus(modules);
-            renderTasks(modules, user, data.average);
-            renderCertificateCta(modules, data);
+            renderDashboard(user, modules);
         } catch (error) {
             $(selectors.dashboardStatus).innerHTML = '<div class="alert alert-error is-visible">' + error.message + '</div>';
         }
