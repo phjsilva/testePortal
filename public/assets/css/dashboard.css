@@ -23,6 +23,21 @@
     gap: 8px;
 }
 
+.module-progress-details {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+}
+
+.module-progress-percent {
+    min-width: 44px;
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-align: right;
+}
+
 .dashboard-task-header {
     display: flex;
     align-items: center;

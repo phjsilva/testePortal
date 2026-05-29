@@ -69,6 +69,12 @@
         return clampPercent(module.percentualAcertos);
     }
 
+    function isModuleProgressComplete(module, progress) {
+        // A barra fica verde quando o aluno atinge a nota mínima do módulo
+        // ou quando já consumiu todas as tentativas disponíveis.
+        return progress >= PASSING_AVERAGE || module.tentativasUsadas >= module.tentativas;
+    }
+
     function updateProgressBars(containerSelector) {
         // A largura visual da barra é aplicada no DOM a partir de data-width.
         // Ex.: data-width="70" resulta em width: 70%.
@@ -79,10 +85,10 @@
 
     function moduleProgressTemplate(module) {
         var progress = moduleProgressPercent(module);
-        var barClass = progress >= 100 ? "success" : "";
+        var barClass = isModuleProgressComplete(module, progress) ? "success" : "";
         var progressLabel = progress > 0 ? formatPercent(progress) : "";
 
-        return '<div class="module-progress-row"><div class="row-between"><strong>' + module.nome + '</strong><span>' + progressLabel + '</span></div><div class="progress"><div class="progress-bar ' + barClass + '" data-width="' + progress + '"></div></div></div>';
+        return '<div class="module-progress-row"><strong>' + module.nome + '</strong><div class="module-progress-details"><div class="progress"><div class="progress-bar ' + barClass + '" data-width="' + progress + '"></div></div><span class="module-progress-percent">' + progressLabel + '</span></div></div>';
     }
 
     function renderProgress(modules) {
