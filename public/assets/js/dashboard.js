@@ -23,13 +23,22 @@
         return Math.round(value) + "%";
     }
 
+    function clampPercent(value) {
+        var numericValue = Number(value || 0);
+        return Math.max(0, Math.min(100, numericValue));
+    }
+
     function normalizeModule(module) {
+        var bestGrade = Number(module.melhor_nota || 0);
+        var lastGrade = Number(module.ultima_nota || 0);
+
         return {
             id: Number(module.nivel),
             nome: module.titulo || "Modulo " + module.nivel,
             status: module.status,
-            nota: Number(module.melhor_nota || 0) || null,
-            ultimaNota: Number(module.ultima_nota || 0),
+            nota: bestGrade || null,
+            ultimaNota: lastGrade,
+            percentualAcertos: clampPercent(bestGrade || lastGrade),
             tentativasUsadas: Math.max(
                 Number(module.tentativas_iniciadas || 0),
                 Number(module.tentativas_usadas || 0),
@@ -50,14 +59,14 @@
         return { complete: complete, best: best, last: last, average: average, progress: progress };
     }
 
-    function progressByStatus(module) {
-        return module.status === "concluido" ? 100 : module.status === "disponivel" ? 50 : 0;
+    function moduleProgressPercent(module) {
+        return clampPercent(module.percentualAcertos);
     }
 
     function renderProgress(modules) {
         $(selectors.dashboardProgress).innerHTML = modules.map(function (module) {
-            var progress = progressByStatus(module);
-            return '<div class="module-progress-row"><div class="row-between"><strong>' + module.nome + '</strong><span>' + (module.nota !== null ? module.nota + "%" : "") + '</span></div><div class="progress"><div class="progress-bar ' + (module.status === "concluido" ? "success" : "") + '" data-width="' + progress + '"></div></div></div>';
+            var progress = moduleProgressPercent(module);
+            return '<div class="module-progress-row"><div class="row-between"><strong>' + module.nome + '</strong><span>' + (module.nota !== null ? module.nota + "%" : "") + '</span></div><div class="progress"><div class="progress-bar ' + (progress >= 100 ? "success" : "") + '" data-width="' + progress + '"></div></div></div>';
         }).join("");
         document.querySelectorAll(selectors.dashboardProgress + " [data-width]").forEach(function (bar) {
             bar.style.width = bar.dataset.width + "%";
