@@ -1,165 +1,141 @@
 <!doctype html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Perfil | Portal Scrum</title>
-        <link
-            rel="shortcut icon"
-            href="../assets/images/logoEscuro.png"
-            type="image/x-icon"
-        />
-        <link rel="stylesheet" href="../assets/css/base.css" />
-        <link rel="stylesheet" href="../assets/css/app.css" />
-        <script src="../assets/js/theme.js" defer></script>
-        <script src="../assets/js/storage.js" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil | Portal Scrum</title>
+    <link
+    rel="shortcut icon"
+    href="../assets/images/logoEscuro.png"
+    type="image/x-icon"
+/>
+    <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/app.css" />
+    <script src="../assets/js/theme.js" defer></script>
+    <script src="../assets/js/storage.js" defer></script>
         <script src="../assets/js/api.js" defer></script>
-        <script src="../assets/js/ui.js" defer></script>
-        <script src="../assets/js/profile.js" defer></script>
-    </head>
-    <body>
-        <div class="page">
-            <header class="site-header">
-                <div class="container header-row">
-                    <div class="header-title header-title-spaced">
-                        <button
-                            class="icon-button"
-                            type="button"
-                            data-back="hub.html"
-                            aria-label="Voltar"
-                        >
-                            &lt;
-                        </button>
-                        <img
-                            class="brand-logo"
-                            src="../assets/images/logoBranca.png"
-                            alt="Logo STACKED"
-                            width="42"
-                            height="42"
-                        />
-                        <span>
-                            <strong>Meu Perfil</strong>
-                            <span>Gerencie suas informaçôes pessoais</span>
-                        </span>
-                    </div>
-                </div>
-            </header>
-
-            <main class="container app-layout">
-                <section
-                    class="card profile-card"
-                    aria-labelledby="profile-title"
-                >
-                    <h1 id="profile-title" class="section-title">
-                        Dados do perfil
-                    </h1>
-                    <form class="profile-form" data-profile-form>
-                        <div class="avatar-editor">
-                            <div class="avatar" data-avatar-preview>U</div>
-                        </div>
-
-                        <div
-                            class="alert"
-                            data-profile-alert
-                            role="alert"
-                        ></div>
-
-                        <div class="form-field">
-                            <label for="name">Nome de usuario</label>
-                            <div class="input-wrap">
-                                <span class="field-icon" aria-hidden="true"
-                                    >U</span
-                                >
-                                <input
-                                    class="input with-icon"
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    placeholder="Seu nome"
-                                    autocomplete="name"
-                                />
-                            </div>
-                        </div>
-                        <div class="form-field">
-                            <label for="email">Email</label>
-                            <div class="input-wrap">
-                                <span class="field-icon" aria-hidden="true"
-                                    >@</span
-                                >
-                                <input
-                                    class="input with-icon"
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    placeholder="seu@email.com"
-                                    autocomplete="email"
-                                />
-                            </div>
-                        </div>
-
-                        <section
-                            class="profile-form"
-                            aria-labelledby="password-title"
-                        >
-                            <h2 id="password-title">Alterar Senha</h2>
-                            <div class="form-field">
-                                <label for="currentPassword">Senha atual</label>
-                                <div class="input-wrap">
-                                    <span class="field-icon" aria-hidden="true"
-                                        >*</span
-                                    >
-                                    <input
-                                        class="input with-icon"
-                                        id="currentPassword"
-                                        name="currentPassword"
-                                        type="password"
-                                        placeholder="********"
-                                        autocomplete="current-password"
-                                    />
-                                </div>
-                            </div>
-                            <div class="form-field">
-                                <label for="newPassword">Nova senha</label>
-                                <div class="input-wrap">
-                                    <span class="field-icon" aria-hidden="true"
-                                        >*</span
-                                    >
-                                    <input
-                                        class="input with-icon"
-                                        id="newPassword"
-                                        name="newPassword"
-                                        type="password"
-                                        placeholder="********"
-                                        autocomplete="new-password"
-                                    />
-                                </div>
-                            </div>
-                            <div class="form-field">
-                                <label for="confirmPassword"
-                                    >Confirmar nova senha</label
-                                >
-                                <div class="input-wrap">
-                                    <span class="field-icon" aria-hidden="true"
-                                        >*</span
-                                    >
-                                    <input
-                                        class="input with-icon"
-                                        id="confirmPassword"
-                                        name="confirmPassword"
-                                        type="password"
-                                        placeholder="********"
-                                        autocomplete="new-password"
-                                    />
-                                </div>
-                            </div>
-                        </section>
-
-                        <button class="button button-primary" type="submit">
-                            Salvar Alterações
-                        </button>
-                    </form>
-                </section>
-            </main>
+    <script src="../assets/js/ui.js" defer></script>
+    <script src="../assets/js/profile.js" defer></script>
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <div class="container header-row">
+          <div class="header-title header-title-spaced">
+            <button
+              class="icon-button"
+              type="button"
+              data-back="hub.html"
+              aria-label="Voltar"
+            >
+              &lt;
+            </button>
+            <img
+              class="brand-logo"
+              src="../assets/images/logoBranca.png"
+              alt="Logo STACKED"
+              width="42"
+              height="42"
+            />
+            <span>
+              <strong>Meu Perfil</strong>
+              <span>Gerencie suas informaçôes pessoais</span>
+            </span>
+          </div>
         </div>
-    </body>
+      </header>
+
+      <main class="container app-layout">
+        <section class="card profile-card" aria-labelledby="profile-title">
+          <h1 id="profile-title" class="section-title">Dados do perfil</h1>
+          <form class="profile-form" data-profile-form>
+            <div class="avatar-editor">
+              <div class="avatar" data-avatar-preview>U</div>
+            </div>
+
+            <div class="alert" data-profile-alert role="alert"></div>
+
+            <div class="form-field">
+              <label for="name">Nome de usuario</label>
+              <div class="input-wrap">
+                <span class="field-icon" aria-hidden="true">U</span>
+                <input
+                  class="input with-icon"
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Seu nome"
+                  autocomplete="name"
+                />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <div class="input-wrap">
+                <span class="field-icon" aria-hidden="true">@</span>
+                <input
+                  class="input with-icon"
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  autocomplete="email"
+                />
+              </div>
+            </div>
+
+            <section class="profile-form" aria-labelledby="password-title">
+              <h2 id="password-title">Alterar Senha</h2>
+              <div class="form-field">
+                <label for="currentPassword">Senha atual</label>
+                <div class="input-wrap">
+                  <span class="field-icon" aria-hidden="true">*</span>
+                  <input
+                    class="input with-icon"
+                    id="currentPassword"
+                    name="currentPassword"
+                    type="password"
+                    placeholder="********"
+                    autocomplete="current-password"
+                  />
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="newPassword">Nova senha</label>
+                <div class="input-wrap">
+                  <span class="field-icon" aria-hidden="true">*</span>
+                  <input
+                    class="input with-icon"
+                    id="newPassword"
+                    name="newPassword"
+                    type="password"
+                    placeholder="********"
+                    autocomplete="new-password"
+                  />
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="confirmPassword">Confirmar nova senha</label>
+                <div class="input-wrap">
+                  <span class="field-icon" aria-hidden="true">*</span>
+                  <input
+                    class="input with-icon"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="********"
+                    autocomplete="new-password"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <button class="button button-primary" type="submit">
+              Salvar Alterações
+            </button>
+          </form>
+        </section>
+      </main>
+    </div>
+  </body>
 </html>
