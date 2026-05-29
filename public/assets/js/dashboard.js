@@ -1,4 +1,28 @@
 (function () {
+    var selectors = {
+        modulesComplete: "[data-modules-complete]",
+        bestGrade: "[data-best-grade]",
+        lastGrade: "[data-last-grade]",
+        averageGrade: "[data-average-grade]",
+        generalProgress: "[data-general-progress]",
+        generalPercent: "[data-general-percent]",
+        dashboardProgress: "[data-dashboard-progress]",
+        dashboardStatus: "[data-dashboard-status]",
+        taskSummary: "[data-task-summary]",
+        taskPercent: "[data-task-percent]",
+        taskBar: "[data-task-bar]",
+        taskList: "[data-task-list]",
+        certificateCta: "[data-certificate-cta]",
+    };
+
+    function $(selector) {
+        return document.querySelector(selector);
+    }
+
+    function formatPercent(value) {
+        return Math.round(value) + "%";
+    }
+
     function normalizeModule(module) {
         return {
             id: Number(module.nivel),
@@ -26,18 +50,22 @@
         return { complete: complete, best: best, last: last, average: average, progress: progress };
     }
 
+    function progressByStatus(module) {
+        return module.status === "concluido" ? 100 : module.status === "disponivel" ? 50 : 0;
+    }
+
     function renderProgress(modules) {
-        document.querySelector("[data-dashboard-progress]").innerHTML = modules.map(function (module) {
-            var progress = module.status === "concluido" ? 100 : module.status === "disponivel" ? 50 : 0;
+        $(selectors.dashboardProgress).innerHTML = modules.map(function (module) {
+            var progress = progressByStatus(module);
             return '<div class="module-progress-row"><div class="row-between"><strong>' + module.nome + '</strong><span>' + (module.nota !== null ? module.nota + "%" : "") + '</span></div><div class="progress"><div class="progress-bar ' + (module.status === "concluido" ? "success" : "") + '" data-width="' + progress + '"></div></div></div>';
         }).join("");
-        document.querySelectorAll("[data-dashboard-progress] [data-width]").forEach(function (bar) {
+        document.querySelectorAll(selectors.dashboardProgress + " [data-width]").forEach(function (bar) {
             bar.style.width = bar.dataset.width + "%";
         });
     }
 
     function renderStatus(modules) {
-        document.querySelector("[data-dashboard-status]").innerHTML = modules.map(function (module) {
+        $(selectors.dashboardStatus).innerHTML = modules.map(function (module) {
             var badge = module.status === "concluido" ? "badge-success" : module.status === "disponivel" ? "badge-primary" : "badge-muted";
             return '<div class="status-item"><span class="badge ' + badge + '">' + module.status + '</span><div><strong>' + module.nome + '</strong><p class="muted">' + module.tentativasUsadas + '/' + module.tentativas + ' tentativas usadas</p></div></div>';
         }).join("");
@@ -52,12 +80,28 @@
 
         var done = tasks.filter(function (task) { return task[1]; }).length;
         var percent = tasks.length ? (done / tasks.length) * 100 : 0;
-        document.querySelector("[data-task-summary]").textContent = done + " de " + tasks.length + " tarefas concluidas";
-        document.querySelector("[data-task-percent]").textContent = Math.round(percent) + "%";
-        document.querySelector("[data-task-bar]").style.width = percent + "%";
-        document.querySelector("[data-task-list]").innerHTML = tasks.map(function (task) {
+        $(selectors.taskSummary).textContent = done + " de " + tasks.length + " tarefas concluidas";
+        $(selectors.taskPercent).textContent = formatPercent(percent);
+        $(selectors.taskBar).style.width = percent + "%";
+        $(selectors.taskList).innerHTML = tasks.map(function (task) {
             return '<div class="task-item ' + (task[1] ? "is-done" : "") + '"><span>' + (task[1] ? "OK" : "--") + '</span><span>' + task[0] + '</span></div>';
         }).join("");
+    }
+
+    function renderSummary(modules, data) {
+        $(selectors.modulesComplete).textContent = data.complete + "/" + modules.length;
+        $(selectors.bestGrade).textContent = data.best + "%";
+        $(selectors.lastGrade).textContent = data.last + "%";
+        $(selectors.averageGrade).textContent = data.average + "%";
+        $(selectors.generalProgress).style.width = data.progress + "%";
+        $(selectors.generalPercent).textContent = formatPercent(data.progress);
+    }
+
+    function renderCertificateCta(modules, data) {
+        var canIssue = modules.length > 0 && data.complete === modules.length && data.average >= 70;
+        $(selectors.certificateCta).innerHTML = canIssue
+            ? '<h2>Parabens! Voce esta aprovado.</h2><p class="lead">Voce completou todos os modulos com media de <strong class="text-success">' + data.average + '%</strong>.</p><a class="button button-secondary" href="certificado.html">Emitir Meu Certificado</a>'
+            : '<h2>Continue sua jornada</h2><p class="lead">Faltam ' + (modules.length - data.complete) + ' modulo(s) para concluir a certificacao.</p><a class="button button-primary" href="modulos.html">Continuar Estudando</a>';
     }
 
     async function fetchJson(url) {
@@ -77,22 +121,13 @@
             var user = await fetchJson("/api/usuarios/me");
             var modules = (await fetchJson("/api/exames")).map(normalizeModule);
             var data = stats(modules);
-            document.querySelector("[data-modules-complete]").textContent = data.complete + "/" + modules.length;
-            document.querySelector("[data-best-grade]").textContent = data.best + "%";
-            document.querySelector("[data-last-grade]").textContent = data.last + "%";
-            document.querySelector("[data-average-grade]").textContent = data.average + "%";
-            document.querySelector("[data-general-progress]").style.width = data.progress + "%";
-            document.querySelector("[data-general-percent]").textContent = Math.round(data.progress) + "%";
+            renderSummary(modules, data);
             renderProgress(modules);
             renderStatus(modules);
             renderTasks(modules, user, data.average);
-
-            var canIssue = modules.length > 0 && data.complete === modules.length && data.average >= 70;
-            document.querySelector("[data-certificate-cta]").innerHTML = canIssue
-                ? '<h2>Parabens! Voce esta aprovado.</h2><p class="lead">Voce completou todos os modulos com media de <strong class="text-success">' + data.average + '%</strong>.</p><a class="button button-secondary" href="certificado.html">Emitir Meu Certificado</a>'
-                : '<h2>Continue sua jornada</h2><p class="lead">Faltam ' + (modules.length - data.complete) + ' modulo(s) para concluir a certificacao.</p><a class="button button-primary" href="modulos.html">Continuar Estudando</a>';
+            renderCertificateCta(modules, data);
         } catch (error) {
-            document.querySelector("[data-dashboard-status]").innerHTML = '<div class="alert alert-error is-visible">' + error.message + '</div>';
+            $(selectors.dashboardStatus).innerHTML = '<div class="alert alert-error is-visible">' + error.message + '</div>';
         }
     });
 })();
