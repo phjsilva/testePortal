@@ -1,9 +1,16 @@
-.panel {
+.dashboard-layout {
+    padding-bottom: 72px;
+}
+
+.panel,
+.dashboard-panel {
     padding: 24px;
 }
 
 .panel h2,
-.panel h3 {
+.panel h3,
+.dashboard-panel h2,
+.dashboard-panel h3 {
     margin: 0 0 18px;
 }
 
@@ -19,7 +26,8 @@
     gap: 8px;
 }
 
-.row-between {
+.row-between,
+.dashboard-task-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -56,7 +64,8 @@
     text-decoration: line-through;
 }
 
-.certificate-cta {
+.certificate-cta,
+.dashboard-certificate-cta {
     padding: 30px;
     margin-top: 32px;
     text-align: center;
@@ -69,7 +78,8 @@
 }
 
 @media (max-width: 720px) {
-    .row-between {
+    .row-between,
+    .dashboard-task-header {
         align-items: flex-start;
         flex-direction: column;
     }
