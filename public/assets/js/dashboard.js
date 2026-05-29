@@ -1,4 +1,6 @@
 (function () {
+    var PASSING_AVERAGE = 70;
+
     var selectors = {
         modulesComplete: "[data-modules-complete]",
         bestGrade: "[data-best-grade]",
@@ -38,6 +40,8 @@
             status: module.status,
             nota: bestGrade || null,
             ultimaNota: lastGrade,
+            // A porcentagem do módulo vem da melhor nota registrada.
+            // Caso ainda não exista melhor nota, usamos a última nota como fallback.
             percentualAcertos: clampPercent(bestGrade || lastGrade),
             tentativasUsadas: Math.max(
                 Number(module.tentativas_iniciadas || 0),
@@ -60,10 +64,14 @@
     }
 
     function moduleProgressPercent(module) {
+        // Altere esta função se a regra futura de progresso por módulo mudar.
+        // Hoje a barra representa diretamente o percentual de acertos do usuário no módulo.
         return clampPercent(module.percentualAcertos);
     }
 
     function updateProgressBars(containerSelector) {
+        // A largura visual da barra é aplicada no DOM a partir de data-width.
+        // Ex.: data-width="70" resulta em width: 70%.
         document.querySelectorAll(containerSelector + " [data-width]").forEach(function (bar) {
             bar.style.width = bar.dataset.width + "%";
         });
@@ -72,8 +80,9 @@
     function moduleProgressTemplate(module) {
         var progress = moduleProgressPercent(module);
         var barClass = progress >= 100 ? "success" : "";
+        var progressLabel = progress > 0 ? formatPercent(progress) : "";
 
-        return '<div class="module-progress-row"><div class="row-between"><strong>' + module.nome + '</strong><span>' + (module.nota !== null ? module.nota + "%" : "") + '</span></div><div class="progress"><div class="progress-bar ' + barClass + '" data-width="' + progress + '"></div></div></div>';
+        return '<div class="module-progress-row"><div class="row-between"><strong>' + module.nome + '</strong><span>' + progressLabel + '</span></div><div class="progress"><div class="progress-bar ' + barClass + '" data-width="' + progress + '"></div></div></div>';
     }
 
     function renderProgress(modules) {
@@ -100,7 +109,7 @@
             return ["Complete o " + module.nome, module.status === "concluido"];
         });
 
-        tasks.push(["Atinja media geral de 70% ou superior", average >= 70]);
+        tasks.push(["Atinja media geral de " + PASSING_AVERAGE + "% ou superior", average >= PASSING_AVERAGE]);
         tasks.push(["Preencha seus dados no perfil", Boolean(user && user.nome)]);
 
         return tasks;
@@ -131,7 +140,7 @@
     }
 
     function renderCertificateCta(modules, data) {
-        var canIssue = modules.length > 0 && data.complete === modules.length && data.average >= 70;
+        var canIssue = modules.length > 0 && data.complete === modules.length && data.average >= PASSING_AVERAGE;
         $(selectors.certificateCta).innerHTML = canIssue
             ? '<h2>Parabens! Voce esta aprovado.</h2><p class="lead">Voce completou todos os modulos com media de <strong class="text-success">' + data.average + '%</strong>.</p><a class="button button-secondary" href="certificado.html">Emitir Meu Certificado</a>'
             : '<h2>Continue sua jornada</h2><p class="lead">Faltam ' + (modules.length - data.complete) + ' modulo(s) para concluir a certificacao.</p><a class="button button-primary" href="modulos.html">Continuar Estudando</a>';
