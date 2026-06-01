@@ -40,8 +40,6 @@
             status: module.status,
             nota: bestGrade || null,
             ultimaNota: lastGrade,
-            // A porcentagem do módulo vem da melhor nota registrada.
-            // Caso ainda não exista melhor nota, usamos a última nota como fallback.
             percentualAcertos: clampPercent(bestGrade || lastGrade),
             tentativasUsadas: Math.max(
                 Number(module.tentativas_iniciadas || 0),
@@ -64,20 +62,14 @@
     }
 
     function moduleProgressPercent(module) {
-        // Altere esta função se a regra futura de progresso por módulo mudar.
-        // Hoje a barra representa diretamente o percentual de acertos do usuário no módulo.
         return clampPercent(module.percentualAcertos);
     }
 
     function isModuleProgressComplete(module, progress) {
-        // A barra fica verde quando o aluno atinge a nota mínima do módulo
-        // ou quando já consumiu todas as tentativas disponíveis.
         return progress >= PASSING_AVERAGE || module.tentativasUsadas >= module.tentativas;
     }
 
     function updateProgressBars(containerSelector) {
-        // A largura visual da barra é aplicada no DOM a partir de data-width.
-        // Ex.: data-width="70" resulta em width: 70%.
         document.querySelectorAll(containerSelector + " [data-width]").forEach(function (bar) {
             bar.style.width = bar.dataset.width + "%";
         });
