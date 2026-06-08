@@ -1,0 +1,421 @@
+/* Estilos Gerais da Página de Certificado */
+
+.action-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    border-bottom: 1px solid var(--border);
+    background: rgba(55, 65, 81, 0.72);
+    backdrop-filter: blur(18px);
+    width: 100%;
+}
+
+[data-theme="light"] .action-header {
+    background: rgba(240, 244, 249, 0.95);
+    border-bottom-color: rgba(139, 92, 246, 0.15);
+}
+
+.main-container {
+    padding-top: 30px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+}
+
+/* Loading State */
+.certificate-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 60px 0;
+    color: var(--muted-foreground);
+    text-align: center;
+}
+
+.certificate-loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error State */
+.error-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.error-card {
+    padding: 40px;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 20px;
+    background: rgba(239, 68, 68, 0.05);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.error-icon {
+    font-size: 3.5rem;
+}
+
+#error-title {
+    color: var(--destructive);
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* Certificate Outer Wrapper */
+.certificate-wrap {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    container-type: inline-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Certificate Layout (A4 Landscape aspect ratio: 1.4177) */
+.certificate {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1120 / 790;
+    background-color: #ffffff;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* SVGs de Fundo e Molduras */
+.certificate-wedges-svg,
+.certificate-border-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.certificate-wedges-svg {
+    z-index: 1;
+}
+
+.certificate-border-svg {
+    z-index: 10;
+}
+
+/* Selo Roxo do Certificado */
+.certificate-seal {
+    position: absolute;
+    top: 5.8cqw;
+    right: 7.2cqw;
+    width: 14.3cqw;
+    height: 17.8cqw;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.certificate-seal svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Bloco Central de Conteúdo */
+.certificate-main {
+    position: absolute;
+    top: 7.6cqw;
+    left: 12cqw;
+    right: 12cqw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 15;
+    width: 76cqw;
+}
+
+.certificate-title-large {
+    font-family: 'Roboto', sans-serif;
+    font-size: 6.4cqw;
+    font-weight: 900;
+    font-style: italic;
+    color: #394353;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.certificate-subtitle-sub {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.3cqw;
+    font-weight: 700;
+    font-style: italic;
+    color: #394353;
+    margin: -0.3cqw 0 3cqw 0;
+    text-transform: lowercase;
+}
+
+.certificate-presentation {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.1cqw;
+    font-weight: 400;
+    font-style: italic;
+    color: #394353;
+    margin: 0 0 1.3cqw 0;
+}
+
+.certificate-student-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 4.6cqw;
+    font-weight: 900;
+    font-style: italic;
+    color: #000000;
+    margin: 0 0 2.2cqw 0;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+}
+
+.certificate-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.1cqw;
+    font-style: italic;
+    font-weight: 400;
+    color: #394353;
+    margin: 0 0 3.2cqw 0;
+    line-height: 1.4;
+}
+
+.certificate-description strong {
+    font-weight: 700;
+}
+
+/* Tabela de Notas e Desempenho */
+.certificate-table-container {
+    width: 50cqw;
+    margin-bottom: 2cqw;
+    display: flex;
+    justify-content: center;
+}
+
+.performance-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 0.16cqw solid #394353;
+    box-sizing: border-box;
+}
+
+.performance-table th,
+.performance-table td {
+    border: 0.16cqw solid #394353;
+    text-align: center;
+    padding: 0.8cqw 0.5cqw;
+    font-size: 1.4cqw;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.performance-table th {
+    font-weight: 700;
+    font-style: italic;
+    color: #394353;
+    background-color: rgba(57, 67, 83, 0.05);
+}
+
+.performance-table td {
+    font-weight: 700;
+    font-style: italic;
+    color: #000000;
+}
+
+.table-average-cell {
+    background-color: rgba(139, 92, 246, 0.08);
+    color: #8B5CF6 !important;
+    font-weight: 900 !important;
+}
+
+/* Dados da Emissão e Aluno */
+.certificate-info-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5cqw;
+    font-size: 1.4cqw;
+    font-style: italic;
+    color: #394353;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.3;
+}
+
+.certificate-info-meta strong {
+    font-weight: 700;
+    color: #000000;
+}
+
+/* Rodapé Esquerdo: ID e QR Code */
+.certificate-footer-left {
+    position: absolute;
+    bottom: 4.5cqw;
+    left: 7.2cqw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 22cqw;
+    z-index: 20;
+}
+
+.validation-id {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5cqw;
+    font-weight: 700;
+    font-style: italic;
+    color: #000000;
+    margin-bottom: 0.8cqw;
+}
+
+.qrcode-canvas {
+    width: 8.5cqw;
+    height: 8.5cqw;
+    background: #ffffff;
+    padding: 0.5cqw;
+    border: 0.12cqw solid #394353;
+    border-radius: 0.4cqw;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qrcode-canvas img,
+.qrcode-canvas canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+.validation-note {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.05cqw;
+    font-style: italic;
+    font-weight: 500;
+    color: #394353;
+    margin: 0.8cqw 0 0 0;
+    line-height: 1.3;
+}
+
+/* Rodapé Direito: Logotipo STACKED */
+.certificate-footer-right {
+    position: absolute;
+    bottom: 4.5cqw;
+    right: 7.2cqw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 14cqw;
+    z-index: 20;
+}
+
+.stacked-logo-symbol {
+    width: 8.2cqw;
+    height: 6cqw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stacked-logo-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.stacked-logo-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2cqw;
+    font-weight: 900;
+    color: #373F47;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 0.5cqw;
+    line-height: 1;
+}
+
+/* Ajustes de Responsividade Geral para a Página */
+@media (max-width: 600px) {
+    .main-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+/* CSS Otimizado para Impressão e PDF */
+@media print {
+    .no-print,
+    .action-header,
+    footer,
+    #btn-back,
+    #btn-download-pdf {
+        display: none !important;
+    }
+
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .main-container {
+        padding: 0 !important;
+        margin: 0 !important;
+        min-height: auto !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        height: 100vh !important;
+    }
+
+    .certificate-wrap {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .certificate {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        background: #ffffff !important;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
