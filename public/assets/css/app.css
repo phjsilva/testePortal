@@ -37,8 +37,7 @@
     background: rgba(139, 92, 246, 0.18);
     color: var(--primary);
 }
-.metric-card,
-.panel {
+.metric-card {
     padding: 24px;
 }
 .metric-top {
@@ -109,25 +108,10 @@
 .header-title-spaced {
     min-width: 0;
 }
-.header-title-spaced .brand-mark,
-.header-title-spaced .brand-logo {
+.header-title-spaced .brand-mark {
     margin-left: 4px;
 }
-.header-row--modules {
-    flex-wrap: wrap;
-}
-.header-progress {
-    text-align: right;
-    min-width: 0;
-}
-.header-progress strong {
-    display: block;
-    white-space: nowrap;
-}
 .module-list,
-.task-list,
-.status-list,
-.progress-list,
 .profile-form {
     display: grid;
     gap: 16px;
@@ -168,9 +152,6 @@
     border-radius: 14px;
     background: var(--muted);
     color: #fff;
-    font-size: 1.35rem;
-    font-weight: 900;
-    line-height: 1;
 }
 .module-card.is-available .module-icon {
     background: var(--primary);
@@ -182,6 +163,68 @@
     margin: 0 0 4px;
     font-size: 1.25rem;
 }
+.study-module-card {
+    color: inherit;
+}
+.study-card-content {
+    min-width: 0;
+}
+.study-card-description,
+.study-introduction,
+.study-paragraph {
+    color: var(--muted-foreground);
+}
+.study-card-description {
+    margin: 8px 0 0;
+}
+.study-layout {
+    max-width: 920px;
+}
+.study-hero {
+    margin-bottom: 30px;
+}
+.study-hero .eyebrow {
+    margin-bottom: 16px;
+}
+.study-introduction {
+    margin: 18px auto 0;
+    max-width: 760px;
+    font-size: 1.05rem;
+}
+.study-content {
+    display: grid;
+    gap: 18px;
+}
+.study-content-card {
+    padding: 26px;
+}
+.study-content-card h2 {
+    margin: 12px 0 12px;
+    font-size: 1.35rem;
+}
+.study-paragraph {
+    margin: 0 0 12px;
+}
+.study-list {
+    display: grid;
+    gap: 10px;
+    margin: 16px 0 0;
+    padding-left: 22px;
+    color: var(--foreground);
+}
+.study-list li::marker {
+    color: var(--primary);
+}
+.study-summary {
+    margin: 18px 0 0;
+    border-left: 4px solid var(--primary);
+    padding-left: 14px;
+    color: var(--foreground);
+    font-weight: 700;
+}
+.study-tips {
+    border-color: rgba(6, 182, 212, 0.5);
+}
 .module-meta {
     display: flex;
     gap: 10px;
@@ -191,57 +234,6 @@
 .top-progress {
     height: 8px;
     background: rgba(55, 65, 81, 0.5);
-}
-.panel h2,
-.panel h3 {
-    margin: 0 0 18px;
-}
-.module-progress-row {
-    display: grid;
-    gap: 8px;
-}
-.row-between {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-.status-item,
-.task-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--border);
-}
-.status-item:last-child,
-.task-item:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
-}
-.task-item {
-    align-items: center;
-    padding: 14px;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    background: rgba(75, 85, 99, 0.18);
-}
-.task-item.is-done {
-    border-color: rgba(16, 185, 129, 0.42);
-    background: rgba(16, 185, 129, 0.1);
-    color: var(--success);
-    text-decoration: line-through;
-}
-.certificate-cta {
-    padding: 30px;
-    margin-top: 32px;
-    text-align: center;
-    border-color: rgba(139, 92, 246, 0.35);
-    background: linear-gradient(
-        135deg,
-        rgba(139, 92, 246, 0.2),
-        rgba(6, 182, 212, 0.15)
-    );
 }
 .avatar-editor {
     display: grid;
@@ -276,19 +268,8 @@
     padding: 30px;
 }
 @media (max-width: 720px) {
-    .row-between,
     .module-main {
         align-items: flex-start;
         flex-direction: column;
-    }
-    .header-progress {
-        width: 100%;
-        text-align: left;
-    }
-    .module-meta .badge {
-        font-size: 0.72rem;
-    }
-    .certificate-cta .button {
-        width: 100%;
     }
 }

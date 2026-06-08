@@ -1,7 +1,10 @@
 (function () {
     window.PortalSession = {
-        logout: function () {
+        logout: async function () {
+           
             localStorage.removeItem("token");
+
+            window.location.href = '/'
         },
     };
 })();
