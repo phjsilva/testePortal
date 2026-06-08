@@ -260,25 +260,33 @@
         }
 
         // Configuração de captura com html2canvas de alta definição.
-        // Utiliza onclone para fixar as dimensões em 1120x790, independentemente da tela do usuário.
+        // Utiliza onclone para fixar as dimensões em 1120x778, independentemente da tela do usuário.
         html2canvas(elementoCertificado, {
             scale: 2.5,
             useCORS: true,
             backgroundColor: "#ffffff",
             logging: false,
             width: 1120,
-            height: 790,
+            height: 778,
             onclone: (clonedDoc) => {
+                const clonedWrapper = clonedDoc.getElementById("certificate-wrapper");
                 const clonedCert = clonedDoc.getElementById("certificate-content");
+                if (clonedWrapper) {
+                    clonedWrapper.style.width = "1120px";
+                    clonedWrapper.style.maxWidth = "1120px";
+                    clonedWrapper.style.minWidth = "1120px";
+                    clonedWrapper.style.display = "block";
+                }
                 if (clonedCert) {
                     clonedCert.style.width = "1120px";
-                    clonedCert.style.height = "790px";
+                    clonedCert.style.height = "778px";
                     clonedCert.style.transform = "none";
                     clonedCert.style.margin = "0";
                     clonedCert.style.position = "relative";
                     clonedCert.style.borderRadius = "0";
                     clonedCert.style.boxShadow = "none";
                     clonedCert.style.display = "block";
+                    clonedCert.style.containerType = "inline-size";
                 }
             }
         }).then((canvas) => {
@@ -293,10 +301,11 @@
             });
 
             const pdfLargura = 297;
-            const pdfAltura = 210;
+            const pdfAltura = 206.5; // Mantém a proporção 535:372 perfeita
+            const yOffset = (210 - pdfAltura) / 2; // Centraliza verticalmente no A4
 
-            // Insere o canvas renderizado cobrindo toda a folha A4 paisagem.
-            pdf.addImage(imgData, "PNG", 0, 0, pdfLargura, pdfAltura);
+            // Insere o canvas renderizado centralizado verticalmente na folha A4.
+            pdf.addImage(imgData, "PNG", 0, yOffset, pdfLargura, pdfAltura);
             
             // Substitui espaços por hifens para construir um nome de arquivo amigável.
             const nomeParticipanteSlug = dadosCertificado.aluno.nome

@@ -72,62 +72,10 @@
                 <div id="certificate-wrapper" class="certificate-wrap" style="display: none;">
                     <article class="certificate" id="certificate-content" aria-labelledby="certificate-title">
                         
-                        <!-- Elementos Decorativos de Fundo (Wedges) -->
-                        <svg class="certificate-wedges-svg" viewBox="0 0 1120 790" preserveAspectRatio="none">
-                            <!-- Faixa Diagonal Laranja/Cinza Escuro Superior -->
-                            <polygon points="0,520 1120,680 1120,790 0,790" fill="#394353" fill-opacity="0.10" />
-                            <!-- Faixa Diagonal Cinza Escuro Inferior -->
-                            <polygon points="0,660 1120,530 1120,790 0,790" fill="#343a43" fill-opacity="0.51" />
-                        </svg>
 
-                        <!-- Moldura das Bordas e Cantos Decorativos -->
-                        <svg class="certificate-border-svg" viewBox="0 0 1120 790">
-                            <defs>
-                                <g id="corner-leaf">
-                                    <path d="M 0 42 A 42 42 0 0 1 42 0" fill="none" stroke="#394353" stroke-width="1.5" />
-                                    <path d="M 0 48 A 48 48 0 0 1 48 0" fill="none" stroke="#394353" stroke-width="1" stroke-dasharray="2,2" />
-                                    <circle cx="16" cy="16" r="3.5" fill="#394353" />
-                                    <path d="M 24 24 C 28 36, 42 50, 52 52 C 50 42, 36 28, 24 24 Z" fill="#394353" />
-                                    <path d="M 25 20 C 31 29, 44 35, 49 32 C 44 29, 31 22, 25 20 Z" fill="#394353" />
-                                    <path d="M 20 25 C 29 31, 35 44, 32 49 C 29 44, 22 31, 20 25 Z" fill="#394353" />
-                                    <circle cx="46" cy="40" r="1.8" fill="#394353" />
-                                    <circle cx="40" cy="46" r="1.8" fill="#394353" />
-                                    <circle cx="58" cy="58" r="2.5" fill="#394353" />
-                                </g>
-                            </defs>
-                            <rect x="20" y="20" width="1080" height="750" fill="none" stroke="#394353" stroke-width="2.5" />
-                            <rect x="28" y="28" width="1064" height="734" fill="none" stroke="#394353" stroke-width="1.5" stroke-dasharray="3,3" />
-                            <use href="#corner-leaf" transform="translate(28, 28)" />
-                            <use href="#corner-leaf" transform="translate(1092, 28) scale(-1, 1)" />
-                            <use href="#corner-leaf" transform="translate(1092, 762) scale(-1, -1)" />
-                            <use href="#corner-leaf" transform="translate(28, 762) scale(1, -1)" />
-                        </svg>
-
-                        <!-- Selo Roxo de Conclusão -->
+                        <!-- Selo/Emblema Roxo de Conclusão (emblema-certificado.svg) -->
                         <div class="certificate-seal">
-                            <svg id="seal-svg" viewBox="0 0 160 200" width="160" height="200">
-                                <defs>
-                                    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#a78bfa" />
-                                        <stop offset="100%" stop-color="#8B5CF6" />
-                                    </linearGradient>
-                                    <radialGradient id="innerPurple" cx="50%" cy="50%" r="50%">
-                                        <stop offset="0%" stop-color="#c084fc" />
-                                        <stop offset="100%" stop-color="#7c3aed" />
-                                    </radialGradient>
-                                    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
-                                        <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.15" />
-                                    </filter>
-                                </defs>
-                                <!-- Fitas Traseiras Escuras -->
-                                <path d="M 60 100 L 40 170 L 65 155 L 80 130 Z" fill="#3a3e42" />
-                                <path d="M 100 100 L 120 170 L 95 155 L 80 130 Z" fill="#3a3e42" />
-                                <!-- Caminho Ondulado do Selo (gerado por JS) -->
-                                <path id="scallop-path" fill="url(#purpleGrad)" filter="url(#dropShadow)" />
-                                <circle cx="80" cy="80" r="46" fill="url(#innerPurple)" />
-                                <circle cx="80" cy="80" r="41" fill="none" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1.5" stroke-dasharray="3,3" />
-                                <circle cx="80" cy="80" r="36" fill="none" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1.2" stroke-dasharray="1,5" stroke-linecap="round" />
-                            </svg>
+                            <img class="certificate-seal-img" src="/assets/images/emblema-certificado.svg" alt="Selo de conclusão" />
                         </div>
 
                         <!-- Conteúdo de Texto Centralizado -->
@@ -184,22 +132,9 @@
                             <p class="validation-note">Para conferir a autenticidade<br>escaneie o QR Code</p>
                         </div>
 
-                        <!-- Rodapé Direito: Logotipo STACKED -->
+                        <!-- Rodapé Direito: Logotipo Stacked (logoEscuro.png) -->
                         <div class="certificate-footer-right">
-                            <div class="stacked-logo-symbol">
-                                <svg class="stacked-logo-svg" viewBox="0 0 92 68">
-                                    <defs>
-                                        <g id="stacked-plate">
-                                            <path d="M 6 15 L 6 19 C 6 22, 9 24, 13 26 L 41 36 C 43 37, 49 37, 51 36 L 79 26 C 83 24, 86 22, 86 19 L 86 15 C 86 18, 83 20, 79 22 L 51 32 C 49 33, 43 33, 41 32 L 13 22 C 9 20, 6 18, 6 15 Z" fill="#292F36" />
-                                            <path d="M 10 11 L 39 3 C 43 2, 49 2, 53 3 L 82 11 C 86 12, 86 15, 82 17 L 53 25 C 49 26, 43 26, 39 25 L 10 17 C 6 15, 6 12, 10 11 Z" fill="#373F47" />
-                                        </g>
-                                    </defs>
-                                    <use href="#stacked-plate" y="22" />
-                                    <use href="#stacked-plate" y="11" />
-                                    <use href="#stacked-plate" y="0" />
-                                </svg>
-                            </div>
-                            <div class="stacked-logo-text">STACKED</div>
+                            <img class="stacked-logo-img" src="/assets/images/logoEscuro.png" alt="Stacked logo" />
                         </div>
 
                     </article>
