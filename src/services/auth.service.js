@@ -4,6 +4,7 @@ const {
 const { createToken } = require("../utils/jwt");
 const { createHttpError } = require("../utils/http-error");
 
+// Busca o usuário, compara o hash da senha e gera o token JWT
 async function loginUsuario({ cpf, senha } = {}) {
     if (!cpf || !senha) {
         throw createHttpError(400, "CPF e senha sao obrigatorios");
@@ -19,7 +20,7 @@ async function loginUsuario({ cpf, senha } = {}) {
         };
     } catch (error) {
         if (
-            error.message === "Usuario inexistente" ||
+            error.message === "usuario inexistente" ||
             error.message === "Dados de login incorretos"
         ) {
             throw createHttpError(401, "CPF ou senha incorretos.");
@@ -29,6 +30,12 @@ async function loginUsuario({ cpf, senha } = {}) {
     }
 }
 
+// Sem ação no servidor nesta versão; a remoção do token acontece no front-end
+async function logoutUsuario() {
+    return { success: true, message: "Logout realizado com sucesso", redirect: "/" };
+}
+
 module.exports = {
     loginUsuario,
+    logoutUsuario,
 };

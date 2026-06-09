@@ -1,5 +1,6 @@
+// Controla a página material-estudo.html (detalhe de um módulo)
 (function () {
-    // Obtém o ID do módulo a partir dos parâmetros de busca da URL (query parameter 'moduleId')
+    // Lê o parâmetro moduleId da query string da URL usando URLSearchParams
     function getModuleId() {
         return new URLSearchParams(window.location.search).get("moduleId");
     }

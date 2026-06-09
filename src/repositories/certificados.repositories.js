@@ -14,6 +14,7 @@ async function findUsuarioByCertificadoHash(certificadoHash) {
   return result.rows[0] || null
 }
 
+// Retorna todos os módulos cadastrados
 async function findModulos() {
   const result = await pool.query(
     `SELECT id_modulo, titulo FROM modulos m ORDER BY id_modulo ASC`
@@ -21,6 +22,7 @@ async function findModulos() {
   return result.rows
 }
 
+// Organiza a lista de tentativas em um Map indexado por id_modulo
 function groupTentativasByModulo(tentativas) {
   return tentativas.reduce((groups, tentativa) => {
     const idModulo = Number(tentativa.id_modulo)
@@ -52,6 +54,7 @@ function mapModulo(modulo, tentativas) {
   }
 }
 
+// Percorre as datas de tentativas concluídas e retorna { dataInicio, dataFim }
 function getCertificatePeriod(modulosConcluidos) {
   const dates = modulosConcluidos
     .flatMap((modulo) => modulo.notasTentativas)
@@ -68,21 +71,26 @@ function getCertificatePeriod(modulosConcluidos) {
   }
 }
 
+// Calcula a média das melhores notas por módulo conforme RF08
 async function gerarMediaFinal(id_usuario) {
-  try {
-    const response =
-      await pool.query(`SELECT ROUND(AVG(r.nota) * 100, 2) AS media_certificado
-                              FROM exames e
-                              JOIN respostas r
-                                  ON r.id_exame = e.id_exame
-                              WHERE e.id_usuario =${id_usuario}`)
-    if (!response) {
-      return { message: 'Certificado inexistente' }
-    }
-    return response.rows[0]
-  } catch (error) {
-    return { message: 'erro do servidor' }
-  }
+  const response = await pool.query(
+    `SELECT ROUND(AVG(melhor_nota), 2) AS media_certificado
+     FROM (
+       SELECT e.id_modulo,
+         MAX(ROUND((COALESCE(SUM(r.nota), 0)::numeric / COUNT(q.id_questao)) * 100)) AS melhor_nota
+       FROM exames e
+       INNER JOIN questoes q
+         ON q.id_modulo = e.id_modulo AND q.grupo IS NOT DISTINCT FROM e.grupo
+       LEFT JOIN respostas r
+         ON r.id_exame = e.id_exame AND r.id_questao = q.id_questao
+       WHERE e.id_usuario = $1
+       GROUP BY e.id_exame, e.id_modulo
+       HAVING COUNT(r.id_resposta) >= COUNT(q.id_questao)
+     ) tentativas_concluidas
+     GROUP BY id_modulo`,
+    [id_usuario]
+  )
+  return response.rows[0]
 }
 
 async function findCertificadoByHash(certificadoHash) {
@@ -152,6 +160,7 @@ async function findCertificadoByHash(certificadoHash) {
   }
 }
 
+// Retorna o progresso de cada módulo; todos precisam estar aprovados para emitir o certificado
 async function findProgressoByUsuarioId(idUsuario) {
   const modulosRows = await findModulos()
   const tentativas = await findModulosRespondidosByUsuario(idUsuario)

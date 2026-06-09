@@ -1,3 +1,5 @@
+// Controla a página material-estudos.html (lista de módulos)
+// Busca a lista de módulos e aciona a renderização
 (function () {
     // Renderiza a lista de módulos de estudo a partir dos dados mockados
     function renderStudyModules() {

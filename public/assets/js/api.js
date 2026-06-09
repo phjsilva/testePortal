@@ -1,9 +1,12 @@
+// Decodifica o payload do JWT em base64 e verifica se o token ainda não expirou
 function tokenValido() {
     const token = localStorage.getItem("token");
     if (!token) return false;
 
     try {
+        // Divide o JWT em 3 partes e decodifica o payload em base64
         const payload = JSON.parse(atob(token.split(".")[1]));
+        // Retorna false se o token já expirou
         return payload.exp * 1000 > Date.now();
     } catch {
         localStorage.removeItem("token");
@@ -11,7 +14,7 @@ function tokenValido() {
     }
 }
 
-// Para paginas autenticadas (painel, perfil, etc.)
+// Para páginas autenticadas (painel, perfil, etc.) — redireciona para login se token inválido
 function requireAuth() {
     if (!tokenValido()) {
         localStorage.removeItem("token");
@@ -19,7 +22,7 @@ function requireAuth() {
     }
 }
 
-// Para paginas publicas (index, login, cadastro)
+// Para páginas públicas (index, login, cadastro) — redireciona para hub se já autenticado
 function requireGuest() {
     const autenticado = tokenValido();
 
@@ -28,6 +31,7 @@ function requireGuest() {
     }
 }
 
+// Retorna o header Authorization: Bearer <token> para requisições autenticadas
 function authHeaders() {
     const token = localStorage.getItem("token");
     return {
@@ -36,6 +40,14 @@ function authHeaders() {
     };
 }
 
+/*
+Wrapper de fetch que injeta o header de auth e redireciona para /login.html em caso de 401
+GET/POST /api/...
+Como testar:
+fetch("/api/exames", { method: "GET" })
+  .then(r => r.json())
+  .then(console.log)
+*/
 async function apiFetch(url, options = {}) {
     const response = await fetch(url, {
         ...options,
@@ -51,20 +63,23 @@ async function apiFetch(url, options = {}) {
     return response;
 }
 
-// Função específica para logout
+/*
+POST /api/auth/logout
+Como testar:
+curl -X POST http://localhost:3000/api/auth/logout \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <token>"
+Payload esperado: nenhum
+Resposta 200: { "success": true, "message": "Logout realizado com sucesso", "redirect": "/" }
+Códigos possíveis: 200, 401, 500
+*/
+// Função específica para logout — chamada pelo botão de sair no hub.html
+// Remove o token do localStorage e redireciona para a home
 async function logout() {
-    try {
-        const response = await apiFetch("/api/auth/logout", {
-            method: "POST",
-        });
-
-        if (response.ok) {
-            localStorage.removeItem("token");
-            window.location.href = "/";
-        } else {
-            console.error("Erro ao fazer logout");
-        }
-    } catch (error) {
-        console.error("Erro ao fazer logout:", error);
+    const response = await apiFetch("/api/auth/logout", { method: "POST" });
+    // Protege contra response undefined (ex: apiFetch retorna undefined após 401)
+    if (response && response.ok) {
+        localStorage.removeItem("token");
+        window.location.href = "/";
     }
 }

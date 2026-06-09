@@ -16,6 +16,7 @@ async function insertUsuarios(client, nome, email, cpf, senha) {
   return result.rows[0] || null
 }
 
+// Insere usuário e hash de senha dentro de uma transação (BEGIN/COMMIT/ROLLBACK)
 async function createUsuarios(nome, email, cpf, senha) {
   const client = await pool.connect()
   const cpfLimpo = cpf.replace(/\D/g, '')
@@ -42,18 +43,21 @@ async function createUsuarios(nome, email, cpf, senha) {
   }
 }
 
+// Atualiza CPF do usuário removendo caracteres não numéricos antes de salvar
 async function updateUsuarioCPF(idUsuario, cpf) {
+  const cpfLimpo = cpf.replace(/\D/g, '')
   const result = await pool.query(
     `UPDATE usuarios
       SET cpf = $1
       WHERE id_usuario = $2
       RETURNING id_usuario`,
-    [cpf, idUsuario]
+    [cpfLimpo, idUsuario]
   )
 
   return result.rows[0] || null
 }
 
+// Retorna os dados do usuário com subquery que calcula nivel_atual, total_tentativas e total_aprovacoes
 async function findUsuarioById(idUsuario) {
   const result = await pool.query(
     `SELECT 
@@ -117,6 +121,7 @@ async function updateUsuarioSenha(idUsuario, senha) {
   return result.rows[0] || null
 }
 
+// Retorna o registro completo do usuário incluindo o hash; lança 'usuario inexistente' se não encontrar
 async function findUsuarioByCpfAndSenha(cpf, senha) {
   const cpfLimpo = cpf.replace(/\D/g, '')
 

@@ -1,6 +1,8 @@
 const { verifyToken } = require("../utils/jwt");
 const { findUsuarioById } = require("../repositories/usuario.repositories");
 
+// Lê o Bearer token do header, verifica a assinatura JWT e injeta req.usuario;
+// retorna 401 se inválido ou ausente
 async function authMiddleware(req, res, next) {
     // Primeiro tenta obter o token do header Authorization
     const authHeader = req.headers.authorization;
@@ -40,6 +42,7 @@ async function authMiddleware(req, res, next) {
     return res.status(401).json({ message: "token não informado" });
 }
 
+// Redireciona para /hub.html se o usuário já tiver sessão ativa
 async function blockAuthMiddleware(req, res, next) {
     // Verifica se há token válido no header ou cookie
     const authHeader = req.headers.authorization;

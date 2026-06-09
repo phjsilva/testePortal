@@ -1,3 +1,4 @@
+// Responde com o status e mensagem do erro se for 4xx; caso contrário responde 500 com mensagem genérica
 function sendErrorResponse(res, error, fallbackMessage = 'Erro interno do servidor.') {
     const statusCode = error.statusCode || 500
   

@@ -1,4 +1,6 @@
+// Funções que criam e retornam os elementos DOM de cada bloco da página de materiais
 (function () {
+    // Cria um elemento genérico com tag, classe e texto opcional
     function createElement(tagName, className, text) {
         var element = document.createElement(tagName);
         if (className) element.className = className;
@@ -14,6 +16,7 @@
         return list;
     }
 
+    // Cria um card para cada módulo e insere na lista lateral
     function renderStudyModuleCard(module) {
         var card = createElement("a", "card module-card is-available study-module-card");
         card.href = "material-estudo.html?moduleId=" + encodeURIComponent(module.id);
@@ -43,6 +46,7 @@
         return card;
     }
 
+    // Monta o conteúdo interno de cada seção do material de estudos
     function renderStudySection(section, index) {
         var article = createElement("article", "card study-content-card");
         article.appendChild(createElement("span", "badge badge-muted", "Seção " + (index + 1)));

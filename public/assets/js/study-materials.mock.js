@@ -1,3 +1,4 @@
+// Dados mockados usados enquanto a API de materiais não está implementada
 (function () {
     window.studyModules = [
         {

@@ -23,6 +23,7 @@ const {
 
 const { createHttpError } = require('../utils/http-error')
 
+// Recebe a lista do repositório e monta a URL completa para cada imagem de questão
 function mapQuestoesResponse(exame) {
   return {
     ...exame,
@@ -76,6 +77,7 @@ function validarRespostaPayload({ id_exame, id_questao, resposta } = {}) {
   return respostaNormalizada
 }
 
+// Valida se o exame e a questão pertencem ao usuário, calcula a nota e persiste a resposta
 async function responderQuestao(idUsuario, payload) {
   const { id_exame, id_questao } = payload
   const respostaNormalizada = validarRespostaPayload(payload)
@@ -132,6 +134,7 @@ async function responderQuestao(idUsuario, payload) {
   }
 }
 
+// Retorna o estado atual do exame para o front-end sem precisar de nova requisição
 async function buscarProximoEstado(idUsuario, exame, idExame) {
   if (!(await usuarioConcluiuExame(idExame))) {
     return null

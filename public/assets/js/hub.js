@@ -1,3 +1,4 @@
+// Controla a página hub.html (dashboard do aluno)
 (function () {
     function renderProfile(user) {
         var name = document.querySelector("[data-user-name]");
@@ -31,6 +32,22 @@
         document.querySelector("[data-hub-best]").textContent = best + "%";
     }
 
+    /*
+    GET /api/usuarios/me
+    Como testar:
+    curl -X GET http://localhost:3000/api/usuarios/me \
+      -H "Authorization: Bearer <token>"
+    Resposta 200: { "id_usuario": 1, "nome": "...", "email": "...", ... }
+    Códigos: 200, 401
+    */
+    /*
+    GET /api/exames
+    Como testar:
+    curl -X GET http://localhost:3000/api/exames \
+      -H "Authorization: Bearer <token>"
+    Resposta 200: lista de módulos com status, notas, tentativas
+    Códigos: 200, 401
+    */
     async function fetchJson(url) {
         var response = await apiFetch(url);
         if (!response) return null;

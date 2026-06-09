@@ -1,5 +1,6 @@
 const { randomBytes, scryptSync, timingSafeEqual } = require("crypto");
 
+// Recebe a senha em texto puro e retorna o hash bcrypt (scrypt) para salvar no banco
 function hashPassword(password) {
     const salt = randomBytes(16).toString("hex");
     const hash = scryptSync(password, salt, 64).toString("hex");
@@ -7,8 +8,9 @@ function hashPassword(password) {
     return `${salt}:${hash}`;
 }
 
+// Compara a senha do login com o hash armazenado
 function verifyPassword(password, storedPassword) {
-    const [salt, storedHash] = (storedPassword || "").split(":");
+    const [salt, storedHash] = (storedPassword || "").split(":")
 
     if (!salt || !storedHash) {
         return false;
@@ -28,6 +30,3 @@ module.exports = {
     hashPassword,
     verifyPassword,
 };
-
-
-// tudo correto
