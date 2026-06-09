@@ -1,4 +1,7 @@
-form &&
+
+ document.addEventListener("DOMContentLoaded", async function () {
+  requireGuest()
+  form &&
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
 
@@ -33,4 +36,4 @@ form &&
       console.error(error)
       alert('Erro ao conectar com o servidor')
     }
-  })
+  })})

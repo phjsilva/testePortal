@@ -18,25 +18,25 @@ Esta sprint focou na implementação do motor de avaliação, gerenciamento de t
 ## 📦 Sprint Backlog
 
 - **US00 - Infraestrutura, Banco de Dados e Documentação Técnica**
-  - [ ] Finalização do Diagrama de Sequência (Fluxo de Avaliação) [#66](https://github.com/TeamStacked/PortalScrum/issues/66)
+  - [x] Finalização do Diagrama de Sequência (Fluxo de Avaliação) [#66](https://github.com/TeamStacked/PortalScrum/issues/66)
   - [x] Refatoração do Diagrama de Caso de Uso [#67](https://github.com/TeamStacked/PortalScrum/issues/67)
   - [x] Refatoração do Diagrama de Classe [#68](https://github.com/TeamStacked/PortalScrum/issues/68)
-  - [ ] Registro da documentação da Sprint 2 [#69](https://github.com/TeamStacked/PortalScrum/issues/69)
-  - [ ] Vídeo do Incremento da Sprint 2 (YouTube) [#70](https://github.com/TeamStacked/PortalScrum/issues/70)
+  - [x] Registro da documentação da Sprint 2 [#69](https://github.com/TeamStacked/PortalScrum/issues/69)
+  - [x] Vídeo do Incremento da Sprint 2 (YouTube) [#70](https://github.com/TeamStacked/PortalScrum/issues/70)
 
 - **US04 - Realização de Avaliação por Nível**
   - [x] Prototipagem da Tela de Exame (Figma) [#72](https://github.com/TeamStacked/PortalScrum/issues/72)
   - [x] HTML/CSS da Tela de Exame (Responsivo) [#73](https://github.com/TeamStacked/PortalScrum/issues/73)
   - [x] Função findProximaQuestaoByUsuario com Mix de Dificuldade [#74](https://github.com/TeamStacked/PortalScrum/issues/74)
   - [x] Rota GET /api/questoes/proxima-questao [#75](https://github.com/TeamStacked/PortalScrum/issues/75)
-  - [ ] Integração Front-end para exibição dinâmica de questões [#76](https://github.com/TeamStacked/PortalScrum/issues/76)
+  - [x] Integração Front-end para exibição dinâmica de questões [#76](https://github.com/TeamStacked/PortalScrum/issues/76)
 
 - **US05 - Gestão de Tentativas e Notas**
   - [x] Função inserirRespostaQuestao e findQuestaoDoExameByUsuario [#77](https://github.com/TeamStacked/PortalScrum/issues/77)
   - [x] Rota POST /api/questoes/responder [#78](https://github.com/TeamStacked/PortalScrum/issues/78)
   - [x] Lógica de validação e bloqueio de tentativas (Máximo 2 por nível) [#79](https://github.com/TeamStacked/PortalScrum/issues/79)
-  - [ ] Cálculo automático da melhor nota por nível e persistência [#80](https://github.com/TeamStacked/PortalScrum/issues/80)
-  - [ ] Feedback visual de conclusão de exame e progresso [#81](https://github.com/TeamStacked/PortalScrum/issues/81)
+  - [x] Cálculo automático da melhor nota por nível e persistência [#80](https://github.com/TeamStacked/PortalScrum/issues/80)
+  - [x] Feedback visual de conclusão de exame e progresso [#81](https://github.com/TeamStacked/PortalScrum/issues/81)
 
 - **US07 - Auditoria de Histórico** ✅
   - [x] Registro de metadados na tabela de respostas (Data/Hora e ID do Exame) [#82](https://github.com/TeamStacked/PortalScrum/issues/82)
@@ -55,13 +55,13 @@ Esta sprint focou na implementação do motor de avaliação, gerenciamento de t
 
 ![Burndown Chart](/docs/sprint-2/burndown_chart_sprint_2.png)
 
-### ⚓ Análise de Execução
+<!-- ### ⚓ Análise de Execução
 
 **Observação sobre o ritmo:**
 
 [Adicionar análise de execução da sprint aqui baseada no Burndown.]
 
----
+--- -->
 
 ## 🚀 Entregas e Resultados
 
@@ -84,6 +84,6 @@ A Sprint 3 será dedicada à criação do dashboard de progresso do estudante e 
 
 ---
 
-## 💡 Observações
+<!-- ## 💡 Observações -->
 
 <!-- [Adicionar quaisquer observações ou pré-requisitos importantes para esta sprint.] -->

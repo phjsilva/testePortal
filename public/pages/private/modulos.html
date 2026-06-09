@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Modulos | Portal Scrum</title>
+        <link rel="shortcut icon" href="../assets/images/logoEscuro.png" type="image/x-icon"/>
+        <link rel="stylesheet" href="../assets/css/base.css" />
+        <link rel="stylesheet" href="../assets/css/app.css" />
+        <script src="../assets/js/theme.js" defer></script>
+        <script src="../assets/js/storage.js" defer></script>
+        <script src="../assets/js/api.js" defer></script>
+        <script src="../assets/js/ui.js" defer></script>
+        <script src="../assets/js/modules.js" defer></script>
+    </head>
+    <body>
+        <div class="page">
+            <header class="site-header">
+                <div class="container header-row header-row--modules">
+                    <div class="header-title header-title-spaced">
+                        <button
+                            class="icon-button"
+                            type="button"
+                            data-back="hub.html"
+                            aria-label="Voltar"
+                        >
+                            &lt;
+                        </button>
+                        <img
+                            class="brand-logo"
+                            src="../assets/images/logoBranca.png"
+                            alt="Logo STACKED"
+                            width="42"
+                            height="42"
+                        />
+                        <span>
+                            <strong>Portal Scrum</strong>
+                            <span>Sistema de Certificação</span>
+                        </span>
+                    </div>
+                    <div class="header-progress">
+                        <p class="muted">Progresso Geral</p>
+                        <strong data-module-count>0/5 Módulos</strong>
+                    </div>
+                </div>
+                <div class="top-progress">
+                    <div class="progress-bar" data-module-progress></div>
+                </div>
+            </header>
+
+            <main class="container app-layout">
+                <section class="center-intro">
+                    <h1 class="section-title">Módulos de Certificaçâo</h1>
+                    <p class="lead">
+                        Complete todos os módulos para obter sua certificação
+                        Scrum.
+                    </p>
+                </section>
+                <section
+                    class="module-list"
+                    data-modules-list
+                    aria-label="Lista de modulos"
+                ></section>
+            </main>
+
+            <div class="modal-backdrop" data-module-modal>
+                <section
+                    class="card modal"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="module-modal-title"
+                >
+                    <h2 id="module-modal-title" data-modal-title>
+                        Iniciar Prova
+                    </h2>
+                    <p class="muted" data-modal-body></p>
+                    <div class="modal-actions">
+                        <button
+                            class="button button-muted"
+                            type="button"
+                            data-modal-cancel
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            class="button button-primary"
+                            type="button"
+                            data-modal-confirm
+                        >
+                            Iniciar Prova
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </body>
+</html>

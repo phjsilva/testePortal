@@ -56,9 +56,9 @@ O backlog foi organizado para atender aos requisitos funcionais (RF) e não func
 | **US00** | Infraestrutura, Banco de Dados e Documentação Técnica                                                                                                            | [RNF05](#rnf05), [RNF06](#rnf06), [RP02](#rp02), [RP04](#rp04) |   1    | ✅🚧  |
 | **US01** | **Cadastro de Usuário**: Como novo usuário, quero me cadastrar no portal fornecendo CPF, nome, e-mail e senha para acessar as avaliações.                        |                 [RF01](#rf01), [RNF03](#rnf03)                 |   1    |  ✅   |
 | **US02** | **Autenticação Segura**: Como usuário cadastrado, quero realizar login com CPF e senha para manter meu progresso salvo.                                          |                 [RF02](#rf02), [RNF04](#rnf04)                 |   1    |  ✅   |
-| **US04** | **Realização de Avaliação por Nível**: Como usuário, quero realizar provas de 10 questões (com mix de dificuldades) para validar meu conhecimento em cada nível. |          [RF03](#rf03), [RF04](#rf04), [RF05](#rf05)           |   2    |  🚧   |
-| **US05** | **Gestão de Tentativas e Notas**: Como usuário, quero ter até 2 tentativas por nível, com o sistema retendo minha melhor nota para o cálculo final.              |          [RF06](#rf06), [RF07](#rf07), [RF08](#rf08)           |   2    |  🚧   |
-| **US07** | **Auditoria de Histórico**: Como sistema, devo registrar a data/hora e questões de cada tentativa para fins de auditoria.                                        |                         [RF10](#rf10)                          |   2    |  🚧   |
+| **US04** | **Realização de Avaliação por Nível**: Como usuário, quero realizar provas de 10 questões (com mix de dificuldades) para validar meu conhecimento em cada nível. |          [RF03](#rf03), [RF04](#rf04), [RF05](#rf05)           |   2    |  ✅   |
+| **US05** | **Gestão de Tentativas e Notas**: Como usuário, quero ter até 2 tentativas por nível, com o sistema retendo minha melhor nota para o cálculo final.              |          [RF06](#rf06), [RF07](#rf07), [RF08](#rf08)           |   2    |  ✅   |
+| **US07** | **Auditoria de Histórico**: Como sistema, devo registrar a data/hora e questões de cada tentativa para fins de auditoria.                                        |                         [RF10](#rf10)                          |   2    |  ✅   |
 | **US03** | **Visualização de Progresso**: Como estudante, quero consultar meu progresso, níveis concluídos e notas para saber quanto falta para minha certificação.         |                 [RF11](#rf11), [RNF01](#rnf01)                 |   3    |       |
 | **US06** | **Emissão de Certificado**: Como usuário aprovado, quero gerar um certificado em PDF com meus dados e média final para comprovar minha competência.              |                         [RF09](#rf09)                          |   3    |       |
 
@@ -79,7 +79,7 @@ graph TD
 |             Período              |            Documentação da Sprint            |                   Vídeo                   |
 | :------------------------------: | :------------------------------------------: | :---------------------------------------: |
 | **Sprint 1:** 13/04 a 30/04/2026 | [Sprint Review](./docs/sprint-1/sprint-1.md) | [▶ YouTube](https://youtu.be/stGfCEhU9n4) |
-| **Sprint 2:** 04/05 a 21/05/2026 | [Sprint Review](./docs/sprint-2/sprint-2.md) |                    🔜                     |
+| **Sprint 2:** 04/05 a 21/05/2026 | [Sprint Review](./docs/sprint-2/sprint-2.md) | [▶ YouTube](https://youtu.be/FIshcp9V2EM) |
 | **Sprint 3:** 25/05 a 11/06/2026 | [Sprint Review](./docs/sprint-3/sprint-3.md) |                    🔜                     |
 
 ---
@@ -136,7 +136,7 @@ A organização segue o padrão de camadas para garantir separação de responsa
 
 1. Clone o repositório e instale as dependências:
    ```bash
-   npm install express dotenv bcryptjs
+   npm i
    ```
 2. Configure o arquivo `.env` na raiz do projeto seguindo o modelo:
    ```env
@@ -153,6 +153,27 @@ A organização segue o padrão de camadas para garantir separação de responsa
    ```bash
    npm run db:init
    ```
+   #### Carga manual do seed (caso o `db:init` falhe por permissão)
+
+Se o comando `npm run db:init` retornar erro de permissão no `COPY`, execute via psql:
+
+```bash
+& "C:\Program Files\PostgreSQL\15\bin\psql.exe" -U postgres -d abp -c "\copy public.modulos (id_modulo, titulo) FROM '<caminho_do_projeto>/src/infra/init/seed-data/modulos.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';', ENCODING 'UTF8')"
+
+& "C:\Program Files\PostgreSQL\15\bin\psql.exe" -U postgres -d abp -c "\copy public.questoes (id_questao, id_modulo, grupo, numero, dificuldade, enunciado, alternativa_correta, alternativa_a, alternativa_b, alternativa_c, alternativa_d, imagem) FROM '<caminho_do_projeto>/src/infra/init/seed-data/questoes.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';', ENCODING 'UTF8')"
+```
+
+> **Atenção:** substitua `<caminho_do_projeto>` pelo caminho absoluto da pasta do projeto na sua máquina.
+> Exemplo: `C:/Users/SEU_USUARIO/Desktop/PortalScrum`
+
+Para verificar se o seed foi carregado corretamente, execute o script:
+
+```bash
+src/infra/init/verify_seed.sql
+```
+```bash
+src/infra/init/verify_seed.sql
+```
 4. Execute o servidor:
    ```bash
    npm run dev

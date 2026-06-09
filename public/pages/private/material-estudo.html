@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Material de Estudos | Portal Scrum</title>
+        <link rel="stylesheet" href="../assets/css/base.css" />
+        <link rel="stylesheet" href="../assets/css/app.css" />
+        <script src="../assets/js/theme.js" defer></script>
+        <script src="../assets/js/storage.js" defer></script>
+        <script src="../assets/js/api.js" defer></script>
+        <script src="../assets/js/ui.js" defer></script>
+        <script src="../assets/js/study-materials.mock.js" defer></script>
+        <script src="../assets/js/study-materials.components.js" defer></script>
+        <script src="../assets/js/study-material.js" defer></script>
+    </head>
+    <body>
+        <div class="page">
+            <header class="site-header">
+                <div class="container header-row header-row--modules">
+                    <div class="header-title header-title-spaced">
+                        <button
+                            class="icon-button"
+                            type="button"
+                            data-back="material-estudos.html"
+                            aria-label="Voltar"
+                        >
+                            &lt;
+                        </button>
+                        <img
+                            class="brand-logo"
+                            src="../assets/images/logoBranca.png"
+                            alt="Logo STACKED"
+                            width="42"
+                            height="42"
+                        />
+                        <span>
+                            <strong>Portal Scrum</strong>
+                            <span>Leitura do módulo</span>
+                        </span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="container app-layout study-layout">
+                <section class="center-intro study-hero">
+                    <span class="eyebrow" data-study-eyebrow>Material textual</span>
+                    <h1 class="section-title" data-study-title>
+                        Material de Estudos
+                    </h1>
+                    <p class="lead" data-study-subtitle></p>
+                    <p class="study-introduction" data-study-introduction></p>
+                </section>
+
+                <section
+                    class="study-content"
+                    data-study-content
+                    aria-label="Conteudo do material de estudo"
+                ></section>
+            </main>
+
+            <button
+                class="icon-button fixed-action fixed-right"
+                type="button"
+                data-action="toggle-theme"
+                aria-label="Alternar tema"
+            >
+                <span data-theme-icon>T</span>
+            </button>
+        </div>
+    </body>
+</html>

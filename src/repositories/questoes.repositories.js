@@ -1,43 +1,4 @@
 const pool = require('../database/db')
-<<<<<<< HEAD
-
-const QUESTOES_POR_TENTATIVA = 10
-const NOTA_MINIMA_APROVACAO = 70
-const MAX_TENTATIVAS = 2
-
-function normalizarAlternativa(valor) {
-  return String(valor || '')
-    .trim()
-    .toLowerCase()
-}
-
-function calcularNotaResposta(alternativaCorreta, resposta) {
-  return normalizarAlternativa(alternativaCorreta) ===
-    normalizarAlternativa(resposta)
-    ? 1
-    : 0
-}
-
-function mapQuestaoRow(row) {
-  return {
-    id_exame: row.id_exame,
-    id_questao: row.id_questao,
-    id_modulo: row.id_modulo,
-    grupo: row.grupo,
-    numero: row.numero,
-    dificuldade: row.dificuldade,
-    enunciado: row.enunciado,
-    alternativa_a: row.alternativa_a,
-    alternativa_b: row.alternativa_b,
-    alternativa_c: row.alternativa_c,
-    alternativa_d: row.alternativa_d,
-    imagem: row.imagem,
-    resposta: row.resposta ? String(row.resposta).trim() : null,
-    nota: row.nota
-  }
-}
-
-=======
 const {
   QUESTOES_POR_TENTATIVA,
   NOTA_MINIMA_APROVACAO,
@@ -65,7 +26,6 @@ function mapQuestaoRow(row) {
   }
 }
 
->>>>>>> parent of 13b7508 (refatora as questoes)
 async function validarComposicaoGrupo(idModulo, grupo) {
   const result = await pool.query(
     `
@@ -930,8 +890,4 @@ module.exports = {
   sincronizarDesbloqueioModulos,
   moduloAnteriorAprovado,
   contarTentativasModulo
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> parent of 13b7508 (refatora as questoes)

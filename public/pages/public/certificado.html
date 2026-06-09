@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Validação de Certificado | Portal Scrum</title>
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Página oficial de verificação e validação de certificados do Portal Scrum. Confirme a autenticidade e o progresso do profissional." />
+        <link rel="shortcut icon" href="../../assets/images/logoEscuro.png" type="image/x-icon" />
+        
+        <!-- Google Fonts - Roboto -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        
+        <!-- CSS do Projeto -->
+        <link rel="stylesheet" href="../../assets/css/base.css" />
+        <link rel="stylesheet" href="../../assets/css/app.css" />
+        <link rel="stylesheet" href="../../assets/css/certificado.css" />
+        
+        <!-- Dependências Externas via CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+        
+        <!-- Scripts do Projeto -->
+        <script src="../../assets/js/storage.js" defer></script>
+        <script src="../../assets/js/api.js" defer></script>
+        <script src="../../assets/js/certificado.js" defer></script>
+    </head>
+    <body>
+        <div class="page">
+            <!-- Barra de Ações (Oculta na impressão) -->
+            <header class="action-header no-print">
+                <div class="container header-row">
+                    <div class="header-title">
+                        <a href="/dashboard.html" class="button button-outline back-btn" id="btn-back">
+                            &lt; Voltar ao Dashboard
+                        </a>
+                        <span class="brand-text">
+                            <strong>Portal Scrum</strong>
+                        </span>
+                    </div>
+                    <div class="nav-actions">
+                        <button class="button button-primary btn-pdf" type="button" id="btn-download-pdf">
+                            Baixar PDF
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Container Principal -->
+            <main class="container app-layout main-container">
+                
+                <!-- Estado de Carregamento (Loading) -->
+                <div id="loading-state" class="certificate-loading">
+                    <div class="certificate-loading-spinner"></div>
+                    <p>Buscando informações do certificado...</p>
+                </div>
+
+                <!-- Estado de Erro -->
+                <div id="error-state" class="error-container" style="display: none;">
+                    <div class="error-card">
+                        <span class="error-icon">⚠️</span>
+                        <h2 id="error-title">Erro ao Carregar Certificado</h2>
+                        <p id="error-message" class="muted">O código de autenticação informado é inválido ou expirou.</p>
+                        <a href="/" class="button button-primary">Voltar ao Início</a>
+                    </div>
+                </div>
+
+                <!-- Estrutura do Certificado (Será exportado para PDF) -->
+                <div id="certificate-wrapper" class="certificate-wrap" style="display: none;">
+                    <article class="certificate" id="certificate-content" aria-labelledby="certificate-title">
+                        
+
+                        <!-- Selo/Emblema Roxo de Conclusão (emblema-certificado.svg) -->
+                        <div class="certificate-seal">
+                            <img class="certificate-seal-img" src="../../assets/images/emblema-certificado.svg" alt="Selo de conclusão" />
+                        </div>
+
+                        <!-- Conteúdo de Texto Centralizado -->
+                        <div class="certificate-main">
+                            <h2 class="certificate-title-large" id="certificate-title">Certificado</h2>
+                            <p class="certificate-subtitle-sub">de conclusão</p>
+                            
+                            <p class="certificate-presentation">Certificamos que</p>
+                            <h1 data-certificate-name class="certificate-student-name">Carregando...</h1>
+                            
+                            <p class="certificate-description">
+                                Concluiu todos os módulos da Stacked, no<br>
+                                período de <strong data-certificate-period>xx/yy/zz a xx/yy/zz</strong>
+                            </p>
+
+                            <!-- Tabela de Notas e Desempenho Acadêmico -->
+                            <div class="certificate-table-container">
+                                <table class="performance-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Módulo 1</th>
+                                            <th>Módulo 2</th>
+                                            <th>Módulo 3</th>
+                                            <th>Módulo 4</th>
+                                            <th>Módulo 5</th>
+                                            <th>Média</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td data-grade-modulo-1>---</td>
+                                            <td data-grade-modulo-2>---</td>
+                                            <td data-grade-modulo-3>---</td>
+                                            <td data-grade-modulo-4>---</td>
+                                            <td data-grade-modulo-5>---</td>
+                                            <td data-grade-final-average class="table-average-cell">---</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Dados do Aluno e Emissão -->
+                            <div class="certificate-info-meta">
+                                <div>E-mail: <strong data-certificate-email>---</strong></div>
+                                <div>CPF: <strong data-certificate-cpf>---</strong></div>
+                                <div>Data de emissão: <strong data-certificate-date>---</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Rodapé Esquerdo: ID e QR Code -->
+                        <div class="certificate-footer-left">
+                            <div class="validation-id">Id: <strong data-certificate-hash>---</strong></div>
+                            <div id="qrcode-container" class="qrcode-canvas"></div>
+                            <p class="validation-note">Para conferir a autenticidade<br>escaneie o QR Code</p>
+                        </div>
+
+                        <!-- Rodapé Direito: Logotipo Stacked (logoEscuro.png) -->
+                        <div class="certificate-footer-right">
+                            <img class="stacked-logo-img" src="../../assets/images/logoEscuro.png" alt="Stacked logo" />
+                        </div>
+
+                    </article>
+                </div>
+                
+            </main>
+        </div>
+    </body>
+</html>

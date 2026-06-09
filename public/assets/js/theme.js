@@ -25,7 +25,7 @@
         var theme = getTheme();
         document.documentElement.dataset.theme = theme;
         document.querySelectorAll("[data-theme-icon]").forEach(function (element) {
-            element.textContent = theme === "dark" ? "L" : "D";
+            element.textContent = theme === "dark" ? "🌞" : "🌑";
         });
         applyBrandLogos(theme);
     }

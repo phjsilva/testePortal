@@ -12,7 +12,8 @@
     "db:init": "node ./src/infra/run-sql"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/TeamStacked/PortalScrum.git"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/TeamStacked/PortalScrum#readme",
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "fs": "^0.0.1-security",

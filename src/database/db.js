@@ -15,8 +15,6 @@ const config = {
     port: process.env.POSTGRES_PORT,
 };
 
-console.log("ENV carregado?", process.env.POSTGRES_PORT);
-
 const pool = new Pool(config);
 
 module.exports = pool;

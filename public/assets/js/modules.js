@@ -1,11 +1,11 @@
 (function () {
     var selectedModule = null;
     var descriptions = {
-        1: "Introducao aos conceitos basicos",
+        1: "Introdução aos conceitos básicos",
         2: "Scrum Master, Product Owner e Time",
         3: "Sprints, Daily, Review e Retrospectiva",
         4: "Product Backlog e Sprint Backlog",
-        5: "Prova completa de certificacao",
+        5: "Finalização de conceitos sobre o Scrum",
     };
 
     function attemptsUsed(module) {
@@ -70,7 +70,7 @@
     async function fetchModules() {
         var response = await apiFetch("/api/exames");
         if (!response) return [];
-        if (!response.ok) throw new Error("Nao foi possivel carregar os modulos.");
+        if (!response.ok) throw new Error("Não foi possível carregar os módulos.");
         var data = await response.json();
         return data.map(normalizeModule).map(withDisplayFields);
     }
@@ -86,7 +86,7 @@
                 return {};
             });
             if (!retry.ok) {
-                alert(retryData.message || "Nao foi possivel iniciar a nova tentativa.");
+                alert(retryData.message || "Não foi possível iniciar a nova tentativa.");
                 return null;
             }
             return retryData;
@@ -106,7 +106,7 @@
             return data;
         }
 
-        alert(data.message || "Nao foi possivel iniciar a prova.");
+        alert(data.message || "Não foi possível iniciar a prova.");
         return null;
     }
 
@@ -118,7 +118,7 @@
         var progress = modules.length ? (complete / modules.length) * 100 : 0;
 
         document.querySelector("[data-module-count]").textContent =
-            complete + "/" + modules.length + " Modulos";
+            complete + "/" + modules.length + " Módulos";
         document.querySelector("[data-module-progress]").style.width = progress + "%";
 
         list.innerHTML = modules
@@ -189,7 +189,7 @@
                         : "") +
                     "</div></div></div>" +
                     (exhausted
-                        ? '<div class="alert alert-error is-visible">Tentativas esgotadas. Voce nao atingiu a nota minima de 70%.</div>'
+                        ? '<div class="alert alert-error is-visible">Tentativas esgotadas. Voce não atingiu a nota minima de 70%.</div>'
                         : "") +
                     "</article>"
                 );
@@ -214,11 +214,11 @@
             ? "Abrir Prova?"
             : "Iniciar Prova";
         document.querySelector("[data-modal-body]").innerHTML = isRedo
-            ? "Voce ja foi aprovado neste modulo com nota <strong>" +
+            ? "Você já foi aprovado neste módulo com nota <strong>" +
               module.melhor_nota +
               "%</strong>. Deseja revisar o ultimo exame?"
             : module.em_andamento
-            ? "Voce tem um exame em andamento neste modulo. Deseja continuar de onde parou?"
+            ? "Você tem um exame em andamento neste módulo. Deseja continuar de onde parou?"
             : "Voce usou <strong>" +
               attemptsUsed(module) +
               " de 2</strong> tentativas. Restam <strong>" +
