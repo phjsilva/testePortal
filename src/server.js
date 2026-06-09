@@ -53,11 +53,12 @@ app.get("/cadastro.html", (req, res) => {
 app.get("/404", (req, res) => {
     res.sendFile(path.join(pagesPublicPath, "404.html"));
 });
-
+app.get("/certificado/:hash", (req, res) => {
+    res.sendFile(path.join(pagesPublicPath, "certificado.html"));
+});
 app.use(function (req, res) {
     res.redirect("/404");
 });
-
 app.listen(PORT, function () {
     console.log(`Rodando em: http://localhost:${PORT}`);
 });
