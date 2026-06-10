@@ -56,7 +56,7 @@ values.push(
       alternativa_b,
       alternativa_c,
       alternativa_C,
-      imagem
+      imagem === "NULL" ? null:imagem
     );
     i += 12;
   }
